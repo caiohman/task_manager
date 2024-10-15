@@ -49,3 +49,9 @@ employee_two as
 		where t.cpf = ''
 )	
 select day_off, days_to_day_off from employee_one union all select day_off, days_to_day_off from employee_two order by day_off asc; 
+
+-- Who is taking a day off?
+select t.tech_name 
+from tech t
+join day_off do2 on do2.cpf = t.cpf
+	where do2.day_off_date = CURRENT_DATE;
