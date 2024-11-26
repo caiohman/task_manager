@@ -89,6 +89,7 @@ constraint fk_part_move_status foreign key(part_status) references part_status(i
 create table if not exists day_off (
 cpf varchar(20) not null,
 day_off_date date,
+unique(cpf, day_off_date),
 constraint fk_day_off_cpf foreign key(cpf) references tech(cpf) 
 );
 
@@ -172,6 +173,13 @@ create table if not exists tech_procedure (
 id serial,
 tech_procedure varchar(255) not null,
 primary key(id)    
+);
+
+create table tech_login (
+cpf varchar(20),
+username varchar(50) not null unique,
+userpassword varchar(255) not null unique,
+constraint fk_login_id foreign key(cpf) references tech(cpf)
 );
 
 -- TODO

@@ -1,0 +1,86 @@
+<template>
+    <Toolbar>
+        <template #start>
+            <RouterLink to="/login">
+              <Button v-tooltip.bottom="login" icon="pi pi-user" class="mr-2" severity="secondary" text />
+            </RouterLink>
+            <RouterLink to="/parts">
+              <Button v-tooltip.bottom="parts" icon="pi pi-wrench" class="mr-2" severity="secondary" text />
+            </RouterLink>
+        </template>
+        <template #end> 
+            <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="name" :placeholder="language" class="w-full md:w-14rem" @change="changeLocale"/>
+        </template>
+    </Toolbar>    
+</template>
+    
+  <script>
+    import { ref } from 'vue'
+    import Dropdown from 'primevue/dropdown';
+    import Toolbar from 'primevue/toolbar';
+    import { useI18n } from 'vue-i18n';
+    import Button from 'primevue/button';
+
+  
+    export default {
+      name: 'SiteNavBar',
+      components: {
+        Toolbar,
+        Dropdown,
+        Button
+      },
+    
+      setup() {
+
+        const { t } = useI18n();
+
+        const languages = ref([
+            {
+                name: 'Brasil',
+            },
+            {
+                name: 'USA',
+            }
+        ]);
+
+        const selectedLanguage = ref();
+
+        return {
+          languages, selectedLanguage, t
+        };
+      },
+
+      data() {
+        return {
+          login: this.t("login.login"),
+          parts: this.t("parts.parts")
+        }
+
+      },
+
+      computed: {
+        language() {
+            return this.t("navbar.country");
+        }
+      },
+
+      methods: {
+        changeLocale() {
+            console.log(this.selectedLanguage)
+            if(this.selectedLanguage.name === 'Brasil') {
+                console.log('Brasil');
+                this.$i18n.locale = 'pt';  
+                return;
+            }
+            if(this.selectedLanguage.name === 'USA') {
+                console.log('USA');
+                this.$i18n.locale = 'en';  
+                return;
+            }
+        }
+      }
+
+    }
+  </script>
+  <style>
+  </style>

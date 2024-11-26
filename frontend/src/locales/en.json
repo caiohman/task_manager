@@ -1,0 +1,25 @@
+{
+    "login": {
+      "register": "Register",
+      "login": "Login",
+      "username": "Username",
+      "password": "Password",
+      "wrongCredentials": "Username or Password incorrect."
+    },
+    "navbar": {
+      "country": "USA" 
+    },
+    "userFirstPage": {
+      "questionConfirm": "Are you sure you want to proceed?",
+      "confirmHeader": "Confirmation",
+      "save": "Save",
+      "cancel": "Cancel"
+    },
+    "parts": {
+      "parts": "Parts",
+      "codeHeader": "Code",
+      "nameHeader": "Name",
+      "statusHeader": "Status",
+      "atmHeader": "Atm"
+    }
+  }

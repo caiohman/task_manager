@@ -1,0 +1,25 @@
+{
+    "login": {
+      "register": "Cadastro",
+      "login": "Entrar",
+      "username": "Usuário",
+      "password": "Senha",
+      "wrongCredentials": "Usuário e/ou senha incorreto(s)."
+     },
+    "navbar": {
+      "country": "Brasil"
+    },
+    "userFirstPage": {
+      "questionConfirm": "Tem certeza que deseja prosseguir?",
+      "confirmHeader": "Confirmação",
+      "save": "Salvar",
+      "cancel": "Cancelar"
+    },
+    "parts": {
+      "parts": "Peças",
+      "codeHeader": "Código",
+      "nameHeader": "Nome",
+      "statusHeader": "Status",
+      "atmHeader": "Pc"
+    }  
+  }
