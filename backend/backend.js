@@ -83,9 +83,30 @@ app.post('/setdayoff', async (req , res) => {
     res.status(201).json(rows);  
   }catch(error) {
     console.error(error);
-    res.status(500).json({ error: "Error response"});
+    res.status(500).json({ error: "Error response" });
+  }    
+});
+
+app.get('/listparts', async (req , res) => {
+  try {
+    const query = `
+      select p.partnumber as code, pc.part_name as name, ps.status_name as status,
+      t.atm as atm, pms.parts_date as date, pms.parts_time as time, t.id as taskid 
+      from parts p
+      join parts_catalog pc on pc.partnumber = p.partnumber
+      join parts_move_status pms on pms.part = p.id
+      join part_status ps on ps.id = pms.part_status
+      join part_task pt on pt.part = p.id 
+      join task t on t.id = pt.task order by t.id, pms.part_status desc;
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
   }
-    
 });
 
 app.listen(port, () => {
