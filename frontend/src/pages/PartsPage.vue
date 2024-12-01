@@ -3,7 +3,7 @@
     <div class="card-position">
         <Card style="background-color:darkgray; width: 80%;">
             <template #content>
-                <DataTable v-model:expandedRows="expandedRows" :value="products" paginator :rows="5" dataKey="code" 
+                <DataTable v-model:expandedRows="expandedRows" :value="products" paginator :rows="5" dataKey="id" 
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
                     <Column expander style="width: 5rem"/>    
                     <Column field="code" :header= codeHeader />
@@ -127,7 +127,7 @@
             },
 
             onRowExpand(event) {
-                var history = this.allDataParts.filter((part) => part.id === event.data.id && part.code === event.data.code)
+                var history = this.allDataParts.filter((part) => part.id === event.data.id);
                 
                 for(let part of history) {
                     part.date = part.date.split("T")[0];
@@ -144,11 +144,5 @@
     }
 </script>
 <style>
-.card-position {
-    display: flex;
-    justify-content: center;
-}
-.timeline-position {
-    width: 50%;
-}
+
 </style>

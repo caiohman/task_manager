@@ -109,16 +109,7 @@
                 </section>  
             </template>
         </Card>
-        <Card style="background-color:darkgray; width: 40%;" class="field-relation">
-            <template #content>
-                <DataTable :value="taskList" paginator :rows="5">
-                    <Column field="atm" :header= atm />
-                    <Column field="problem" :header= problem />
-                    <Column field="type" :header= type />
-                    <Column field="status" :header= status />
-                </DataTable>
-            </template>
-        </Card>
+        <TaskTable class="field-relation"/>
     </div>
 </template>
 <script>
@@ -130,8 +121,7 @@
     import { useI18n } from 'vue-i18n';
     import Button from 'primevue/button';
     import RadioButton from 'primevue/radiobutton';
-import Column from 'primevue/column';
-import DataTable from 'primevue/datatable';
+    import TaskTable from '../components/TaskTable.vue';
 
     export default {
         name: 'TaskPage',
@@ -141,9 +131,8 @@ import DataTable from 'primevue/datatable';
             Select,
             FloatLabel,
             Button,
-            RadioButton,
-            Column,
-            DataTable 
+            RadioButton, 
+            TaskTable
         },
 
         setup() {
@@ -159,11 +148,8 @@ import DataTable from 'primevue/datatable';
             const selectedTaskType = ref();
             const taskType = ref();
 
-            const taskList = ref([]);
-            const taskAllList = ref();
-
             return {
-                value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType, taskList, taskAllList
+                value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType
             };
         },
 
@@ -183,8 +169,7 @@ import DataTable from 'primevue/datatable';
         beforeMount() {
             this.getAtmsList();   
             this.getProblemsList(); 
-            this.getTaskTypeList();
-            this.getTasKsList();    
+            this.getTaskTypeList();    
         },
 
         methods: {
@@ -232,29 +217,6 @@ import DataTable from 'primevue/datatable';
 
             addTaskTypeList(json) {
                 this.taskType = json;
-            },
-
-            async getTasKsList() {
-                await fetch("http://localhost:8090/listtasks", {
-                    method: "POST",
-                    headers: {"Content-Type": "application/json"}, 
-                })
-                .then(response => response.json())
-                .then(json => this.addTaskList(json))
-                .catch(error => this.getUserError(error))    
-            },
-
-            addTaskList(json) {
-                this.taskAllList = json;
-                var taskId = 0;
-
-                for(let task of this.taskAllList) {
-                    if( taskId === task.id) continue
-                    else {
-                        this.taskList.push(task)
-                        taskId = task.id
-                    }    
-                }
             },
         }
     }

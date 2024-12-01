@@ -1,0 +1,7 @@
+.card-position {
+    display: flex;
+    justify-content: center;
+}
+.timeline-position {
+    width: 50%;
+}

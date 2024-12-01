@@ -9,6 +9,11 @@ import router from './router.js';
 import 'primeicons/primeicons.css';
 import ConfirmationService from 'primevue/confirmationservice'
 import Tooltip from 'primevue/tooltip';
+import './assets/css/main.css';
+import Card from 'primevue/card';
+import Column from 'primevue/column';
+import DataTable from 'primevue/datatable';
+import Timeline from 'primevue/timeline';
 
 const i18n = createI18n({ 
     legacy: false,
@@ -31,8 +36,12 @@ use(PrimeVue, {
 }).
 use(i18n).
 use(router).
-use(ConfirmationService)
-.directive('tooltip', Tooltip)
+use(ConfirmationService).
+directive('tooltip', Tooltip).
+component('Card', Card).
+component('Column', Column).
+component('DataTable', DataTable).
+component('Timeline', Timeline)
 
 router.isReady().then(() => {
   app.mount('#app')
