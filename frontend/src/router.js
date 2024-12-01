@@ -2,7 +2,8 @@ import { createMemoryHistory, createRouter } from 'vue-router'
 import LoginPage from './pages/LoginPage.vue'
 import UserFirstPage from './pages/UserFirstPage.vue'
 import HomePage from './pages/HomePage.vue'
-import Parts from './pages/Parts.vue'
+import PartsPage from './pages/PartsPage.vue'
+import TasksPage from './pages/TasksPage.vue'
 
 
 const routes = [
@@ -23,8 +24,14 @@ const routes = [
     {
         path: '/parts/',
         name: 'parts', 
-        component: Parts,
+        component: PartsPage,
         props: true
+    },
+    {
+        path: '/tasks/',
+        name: 'tasks', 
+        component: TasksPage,
+        props: true 
     }
 ]
 

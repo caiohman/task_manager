@@ -1,16 +1,22 @@
 <template>
-    <div class="card">
-        <DataTable :value="products" tableStyle="width: 50%">
-            <Column field="code" :header= codeHeader ></Column>
-            <Column field="name" :header= nameHeader ></Column>
-            <Column :header= statusHeader >
-                <template #body="slotProps">
-                    <Tag :value="slotProps.data.status" :severity="getStatus(slotProps.data)" />
-                </template>
-            </Column>
-            <Column field="atm" :header= atmHeader ></Column>
-        </DataTable>
+    <h2>{{ parts }}</h2>
+    <div class="card-position">
+        <Card style="background-color:darkgray; width: 80%;">
+            <template #content>
+                <DataTable :value="products" paginator :rows="5">
+                    <Column field="code" :header= codeHeader />
+                    <Column field="name" :header= nameHeader />
+                    <Column :header= statusHeader >
+                        <template #body="slotProps">
+                            <Tag :value="slotProps.data.status" :severity="getStatus(slotProps.data)" />
+                        </template>
+                    </Column>
+                    <Column field="atm" :header= atmHeader />
+                </DataTable>
+            </template>
+        </Card>
     </div>
+    
 </template>
 
 <script>
@@ -19,13 +25,15 @@ import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import Tag from 'primevue/tag';
 import { useI18n } from 'vue-i18n';
+import Card from 'primevue/card';
 
 export default {
-    name: 'Parts',
+    name: 'PartsPage',
     components: {
         DataTable,
         Column,
-        Tag
+        Tag,
+        Card
 
     },
 
@@ -35,15 +43,16 @@ export default {
 
         return {
             products, t
-        }
+        };
     },
 
     data() {
         return {
             codeHeader: this.t("parts.codeHeader"),
-            nameHeader: this.t("parts.nameHeader"),
-            statusHeader: this.t("parts.statusHeader"),
-            atmHeader: this.t("parts.atmHeader"),
+            nameHeader: this.t("general.name"),
+            statusHeader: this.t("general.status"),
+            atmHeader: this.t("general.atm"),
+            parts: this.t("parts.parts"),
             allDataParts: null
         }
     },
@@ -99,3 +108,9 @@ export default {
     }
 }
 </script>
+<style>
+.card-position {
+    display: flex;
+    justify-content: center;
+}
+</style>

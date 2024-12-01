@@ -18,8 +18,20 @@
     "parts": {
       "parts": "Peças",
       "codeHeader": "Código",
-      "nameHeader": "Nome",
-      "statusHeader": "Status",
       "atmHeader": "Pc"
+    },
+    "tasks": {
+      "tasks": "Chamados",
+      "atm": "Pc",
+      "atmName": "Nome",
+      "atmNeighborhood": "Bairro",
+      "taskProblem": "Problema",
+      "taskProblemName": "Nome",
+      "typeHeader": "Tipo"
+    },
+    "general": {
+      "status": "Status",
+      "name": "Nome",
+      "atm": "Pc"
     }  
   }

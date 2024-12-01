@@ -7,26 +7,29 @@
             <RouterLink to="/parts">
               <Button v-tooltip.bottom="parts" icon="pi pi-wrench" class="mr-2" severity="secondary" text />
             </RouterLink>
+            <RouterLink to="/tasks">
+              <Button v-tooltip.bottom="tasks" icon="pi pi-briefcase" class="mr-2" severity="secondary" text />
+            </RouterLink>
         </template>
         <template #end> 
-            <Dropdown v-model="selectedLanguage" :options="languages" optionLabel="name" :placeholder="language" class="w-full md:w-14rem" @change="changeLocale"/>
+            <Select v-model="selectedLanguage" :options="languages" optionLabel="name" :placeholder="language" @change="changeLocale"/>
         </template>
     </Toolbar>    
 </template>
     
   <script>
     import { ref } from 'vue'
-    import Dropdown from 'primevue/dropdown';
     import Toolbar from 'primevue/toolbar';
     import { useI18n } from 'vue-i18n';
     import Button from 'primevue/button';
+    import Select from 'primevue/select';
 
   
     export default {
       name: 'SiteNavBar',
       components: {
         Toolbar,
-        Dropdown,
+        Select,
         Button
       },
     
@@ -53,7 +56,8 @@
       data() {
         return {
           login: this.t("login.login"),
-          parts: this.t("parts.parts")
+          parts: this.t("parts.parts"),
+          tasks: this.t("tasks.tasks")
         }
 
       },

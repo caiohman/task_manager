@@ -1,6 +1,6 @@
 <template>
     <div class="screen-size screen-item-position">
-      <Card class="card-position card-dimension">
+      <Card class="card-position card-dimension" style="background-color:darkgray">
         <template #header>
           <div class="logo-position">
             <!-- <img alt="company name" :src="cardImage" class="logo"  /> -->

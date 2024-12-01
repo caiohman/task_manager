@@ -109,6 +109,75 @@ app.get('/listparts', async (req , res) => {
   }
 });
 
+app.get('/listatms', async (req , res) => {
+  try {
+    const query = `
+      select a.id as atm, atm_name as name, r.region_name as neighborhood 
+      from atm a
+      join region r on r.id = a.region;
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.get('/listproblems', async (req , res) => {
+  try {
+    const query = `
+      select id as problem, problem_description as name from problems p; 
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.get('/listtasktype', async (req , res) => {
+  try {
+    const query = `
+      select * from task_type; 
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.post('/listtasks', async (req , res) => {
+
+  try {
+    const query = `
+      select t.id, t.problem, t.atm, tt.task_type as type, 
+      tss.service_date as date, tss.service_time as time,
+      gs.status_name as status 
+      from task t
+      join task_type tt on tt.id = t.task_type
+      join tech_service_status tss on tss.task = t.id
+      join general_status gs on gs.id = tss.task_status order by t.id, tss.task_status desc;
+    `;
+  
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);  
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response"});
+  }    
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

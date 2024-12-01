@@ -1,7 +1,7 @@
 <template>
     <h1>{{ name }}</h1>
-    <div class="card flex justify-center">
-        <DatePicker v-model="date" inline class="w-full sm:w-[30rem]" dateFormat="yy-mm-dd">
+    <div >
+        <DatePicker v-model="date" inline dateFormat="yy-mm-dd">
             <template #date="slotProps">
                 <strong v-if="findDayOff(slotProps.date) === true" style="color: red">{{ slotProps.date.day }}</strong>
                 <template v-else>{{ slotProps.date.day }}</template>
@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import { ref } from "vue"
 import DatePicker from 'primevue/datepicker'
 import ConfirmDialog from 'primevue/confirmdialog'
 import Button from 'primevue/button'

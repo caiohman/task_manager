@@ -19,7 +19,20 @@
       "parts": "Parts",
       "codeHeader": "Code",
       "nameHeader": "Name",
-      "statusHeader": "Status",
       "atmHeader": "Atm"
+    },
+    "tasks": {
+      "tasks": "Tasks",
+      "atm": "Atm",
+      "atmName": "Name",
+      "atmNeighborhood": "Neighborhood",
+      "taskProblem": "Problem",
+      "taskProblemName": "Name",
+      "typeHeader": "Type"
+    },
+    "general": {
+      "status": "Status",
+      "name": "Name",
+      "atm": "Atm"
     }
   }
