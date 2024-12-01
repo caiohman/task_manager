@@ -17,8 +17,7 @@
     },
     "parts": {
       "parts": "Peças",
-      "codeHeader": "Código",
-      "atmHeader": "Pc"
+      "codeHeader": "Código"
     },
     "tasks": {
       "tasks": "Chamados",

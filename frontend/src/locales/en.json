@@ -17,9 +17,7 @@
     },
     "parts": {
       "parts": "Parts",
-      "codeHeader": "Code",
-      "nameHeader": "Name",
-      "atmHeader": "Atm"
+      "codeHeader": "Code"
     },
     "tasks": {
       "tasks": "Tasks",
