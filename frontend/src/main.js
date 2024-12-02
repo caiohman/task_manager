@@ -16,6 +16,10 @@ import DataTable from 'primevue/datatable';
 import Timeline from 'primevue/timeline';
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
+import { createPinia } from 'pinia';
+
+
+const pinia = createPinia();
 
 const i18n = createI18n({ 
     legacy: false,
@@ -40,6 +44,7 @@ use(i18n).
 use(router).
 use(ConfirmationService).
 use(ToastService).
+use(pinia).
 directive('tooltip', Tooltip).
 component('Card', Card).
 component('Column', Column).

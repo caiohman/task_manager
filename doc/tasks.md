@@ -20,6 +20,10 @@ Save task after applying filters
 
 Give the user an error message whenever he tries to add a day off date already in db.
 
+#### 05 - Only show pages after login (feature)
+
+Make visible pages options at navbar only after login
+
 
 # BackLog
 

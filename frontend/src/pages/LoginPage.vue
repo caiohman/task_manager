@@ -40,6 +40,7 @@
     import Password from 'primevue/password';
     import { useI18n } from 'vue-i18n';
     import { ref } from 'vue';
+    import loggedStore from '../stores/LoggedStore';
   
     export default {
       name: 'LoginScreen',
@@ -57,9 +58,10 @@
   
         const usernameValue = ref();
         const  passwordValue  = ref();
+        const isLogged = loggedStore();
   
         return {
-          t, usernameValue, passwordValue
+          t, usernameValue, passwordValue, isLogged
         };
       },
   
@@ -86,7 +88,8 @@
   
         getUserInformations(json) {
           if (json.length !== 0) {
-            this.userData = json[0]
+            this.userData = json[0];
+            this.isLogged.updateLogged(true);
             this.$router.push({
               name: 'user',
               params: { cpf: this.userData.cpf, name: this.userData.tech_name }
