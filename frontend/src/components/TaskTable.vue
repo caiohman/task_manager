@@ -33,6 +33,7 @@
 
     export default {
         name: "TaskTable",
+        emits: ["newTaskId"],
 
         setup() {
             const taskList = ref([]);
@@ -80,13 +81,14 @@
                 this.taskAllList = json;
                 var taskId = 0;
 
-                 for(let task of this.taskAllList) {
+                for(let task of this.taskAllList) {
                     if( taskId === task.id) continue
                     else {
                         this.taskList.push(task);
                         taskId = task.id
-                     }    
-                 }
+                     }     
+                }
+                this.$emit("newTaskId", this.taskList[this.taskList.length - 1].id + 1);
             },
 
             onRowExpand(event) {

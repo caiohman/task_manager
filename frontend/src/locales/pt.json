@@ -26,11 +26,16 @@
       "atmNeighborhood": "Bairro",
       "taskProblem": "Problema",
       "taskProblemName": "Nome",
-      "typeHeader": "Tipo"
+      "typeHeader": "Tipo",
+      "errorDetail": "Preencher os filtros antes de submeter",
+      "taskCreated": "Tarefa Criada com Sucesso",
+      "taskNotCreated": "Tarefa não criada. Por favor atualize a página e tente novamente."
     },
     "general": {
       "status": "Status",
       "name": "Nome",
-      "atm": "Pc"
+      "atm": "Pc",
+      "errorMessage": "Mensagem de Erro",
+      "successMessage": "Mensagem de Sucesso"
     }  
   }

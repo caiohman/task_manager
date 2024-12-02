@@ -178,6 +178,33 @@ app.post('/listtasks', async (req , res) => {
   }    
 });
 
+app.post('/setnewtask', async (req, res) => {
+  const { id, atm, problem, type } = req.body;
+   
+  try {
+    const insertTask = `
+      insert into task (id, atm, problem, task_type) values (
+      $1, $2, $3, (select id from task_type tt where tt.task_type = $4));
+    `;
+
+    const insertTechServiceStatus = `
+      insert into tech_service_status (service_date, service_time, task, task_status, tech) values (
+      CURRENT_DATE, CURRENT_TIME, $1 , 1, '000.000.000-00');
+    `
+
+    const valuesTask = [id, atm, problem, type];
+    const valuesTechServiceStatus = [id];
+
+    await pool.query(insertTask, valuesTask);
+    await pool.query(insertTechServiceStatus, valuesTechServiceStatus);
+
+    res.status(201).json({ message: "Created"});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response"});
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

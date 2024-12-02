@@ -104,12 +104,13 @@
                 </section>
         
                 <section class="options-line">
-                    <Button icon="pi pi-plus" class="field-relation"/>
+                    <Toast />
+                    <Button icon="pi pi-plus" class="field-relation" @click="saveNewTaskValidation"/>
                     <Button icon="pi pi-search" class="field-relation"/>
                 </section>  
             </template>
         </Card>
-        <TaskTable class="field-relation"/>
+        <TaskTable class="field-relation" @new-task-id="(id) => newTaskId = id"/>
     </div>
 </template>
 <script>
@@ -122,6 +123,7 @@
     import Button from 'primevue/button';
     import RadioButton from 'primevue/radiobutton';
     import TaskTable from '../components/TaskTable.vue';
+    import { useToast } from 'primevue/usetoast';
 
     export default {
         name: 'TaskPage',
@@ -148,8 +150,12 @@
             const selectedTaskType = ref();
             const taskType = ref();
 
+            const toast = useToast();
+
+            const newTaskId = ref();
+
             return {
-                value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType
+                value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType, toast, newTaskId
             };
         },
 
@@ -218,6 +224,41 @@
             addTaskTypeList(json) {
                 this.taskType = json;
             },
+
+            async setNewTask() {
+                await fetch("http://localhost:8090/setnewtask", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({id: this.newTaskId, atm: this.selectedAtm.atm, problem: this.selectedProblems.problem, type: this.selectedTaskType}), 
+                })
+                .then(response => {
+                    this.toast.add({ severity: 'success', 
+                        summary: this.t("general.successMessage"), 
+                        detail: this.t("tasks.taskCreated"), 
+                        life: 3000 });
+                })
+                .catch(error => this.getnewTaskError(error)) 
+            },
+
+            saveNewTaskValidation() {
+                if(this.selectedAtm === undefined || 
+                 this.selectedProblems === undefined || 
+                 this.selectedTaskType === undefined ) {
+                    this.toast.add({ severity: 'error', 
+                     summary: this.t("general.errorMessage"), 
+                     detail: this.t("tasks.errorDetail"), 
+                     life: 3000 });
+                } else {
+                    this.setNewTask()
+                }
+            },
+
+            getnewTaskError(error) {
+                this.toast.add({ severity: 'error', 
+                     summary: this.t("general.errorMessage"), 
+                     detail: this.t("tasks.taskNotCreated"), 
+                     life: 3000 }); 
+            }
         }
     }
 </script>

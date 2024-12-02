@@ -14,6 +14,8 @@ import Card from 'primevue/card';
 import Column from 'primevue/column';
 import DataTable from 'primevue/datatable';
 import Timeline from 'primevue/timeline';
+import ToastService from 'primevue/toastservice';
+import Toast from 'primevue/toast';
 
 const i18n = createI18n({ 
     legacy: false,
@@ -37,11 +39,13 @@ use(PrimeVue, {
 use(i18n).
 use(router).
 use(ConfirmationService).
+use(ToastService).
 directive('tooltip', Tooltip).
 component('Card', Card).
 component('Column', Column).
 component('DataTable', DataTable).
-component('Timeline', Timeline)
+component('Timeline', Timeline).
+component('Toast', Toast)
 
 router.isReady().then(() => {
   app.mount('#app')

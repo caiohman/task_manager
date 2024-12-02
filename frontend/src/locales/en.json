@@ -26,11 +26,16 @@
       "atmNeighborhood": "Neighborhood",
       "taskProblem": "Problem",
       "taskProblemName": "Name",
-      "typeHeader": "Type"
+      "typeHeader": "Type",
+      "errorDetail": "Fill filter before submit",
+      "taskCreated": "Task Created",
+      "taskNotCreated": "Task not created. Please refresh the page and try again."
     },
     "general": {
       "status": "Status",
       "name": "Name",
-      "atm": "Atm"
+      "atm": "Atm",
+      "errorMessage": "Error Message",
+      "successMessage": "Success Message"
     }
   }

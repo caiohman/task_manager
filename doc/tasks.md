@@ -11,3 +11,13 @@ FeedBack: Done, but there is a bug when expand more than one row
 Add task timeline inside of DataTable using Row Expansion
 
 Feedback: Same as task 01.
+
+#### 03 - Save new task (feature)
+
+Save task after applying filters
+
+# BackLog
+
+#### ?? - Fix Add Repeated Date to Calendar (fix)
+
+Give the user an error message whenever he tries to add a day off date already in db.
