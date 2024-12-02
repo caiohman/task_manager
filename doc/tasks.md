@@ -16,6 +16,11 @@ Feedback: Same as task 01.
 
 Save task after applying filters
 
+#### 04 - Fix Add Repeated Date to Calendar (fix)
+
+Give the user an error message whenever he tries to add a day off date already in db.
+
+
 # BackLog
 
 #### ?? - Fix Add Repeated Date to Calendar (fix)

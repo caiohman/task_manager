@@ -13,7 +13,9 @@
       "questionConfirm": "Are you sure you want to proceed?",
       "confirmHeader": "Confirmation",
       "save": "Save",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "dateExists": "Date already exists.",
+      "dateAdded": "Date Added."
     },
     "parts": {
       "parts": "Parts",
@@ -36,6 +38,7 @@
       "name": "Name",
       "atm": "Atm",
       "errorMessage": "Error Message",
-      "successMessage": "Success Message"
+      "successMessage": "Success Message",
+      "serverError": "Server Error"
     }
   }

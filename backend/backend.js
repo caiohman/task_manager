@@ -77,13 +77,13 @@ app.post('/setdayoff', async (req , res) => {
       ($1, $2);
     `;
     const values = [cpf, date];
-  
-    const { rows } = await pool.query(query, values);
-    console.log(rows);
-    res.status(201).json(rows);  
+    await pool.query(query, values);
+    res.status(201).json({ message : "Added" });  
   }catch(error) {
     console.error(error);
-    res.status(500).json({ error: "Error response" });
+    (error.code === '23505') ? res.status(400).json({ error: "Day off already exists." }) : 
+      res.status(500).json({ error: "Error response" })
+    ;
   }    
 });
 

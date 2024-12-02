@@ -13,7 +13,9 @@
       "questionConfirm": "Tem certeza que deseja prosseguir?",
       "confirmHeader": "Confirmação",
       "save": "Salvar",
-      "cancel": "Cancelar"
+      "cancel": "Cancelar",
+      "dateExists": "Data já existe.",
+      "dateAdded": "Data adicionada."
     },
     "parts": {
       "parts": "Peças",
@@ -36,6 +38,7 @@
       "name": "Nome",
       "atm": "Pc",
       "errorMessage": "Mensagem de Erro",
-      "successMessage": "Mensagem de Sucesso"
+      "successMessage": "Mensagem de Sucesso",
+      "serverError": "Erro no servidor."
     }  
   }
