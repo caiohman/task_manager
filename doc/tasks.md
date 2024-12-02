@@ -24,6 +24,10 @@ Give the user an error message whenever he tries to add a day off date already i
 
 Make visible pages options at navbar only after login
 
+#### 06 - Redirect login icon to first page icon (feature)
+
+After login, redirect icon to first page in case of user's click on icon.
+
 
 # BackLog
 

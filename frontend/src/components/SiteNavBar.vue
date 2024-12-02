@@ -1,15 +1,20 @@
 <template>
     <Toolbar>
         <template #start>
-            <RouterLink to="/login">
-              <Button v-tooltip.bottom="login" icon="pi pi-user" class="mr-2" severity="secondary" text />
-            </RouterLink>
             <template v-if="isLogged.logged">
+              <RouterLink :to="{ name: 'user', params: { cpf: isLogged.cpf , name: isLogged.name }}">
+                <Button v-tooltip.bottom="login" icon="pi pi-user" class="mr-2" severity="secondary" text />
+              </RouterLink>
               <RouterLink to="/parts">
                 <Button v-tooltip.bottom="parts" icon="pi pi-wrench" class="mr-2" severity="secondary" text />
               </RouterLink>
               <RouterLink to="/tasks">
                 <Button v-tooltip.bottom="tasks" icon="pi pi-briefcase" class="mr-2" severity="secondary" text />
+              </RouterLink>
+            </template>
+            <template v-else>
+              <RouterLink to="/login">
+                <Button v-tooltip.bottom="login" icon="pi pi-user" class="mr-2" severity="secondary" text />
               </RouterLink>
             </template>
         </template>

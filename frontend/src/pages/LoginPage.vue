@@ -90,6 +90,8 @@
           if (json.length !== 0) {
             this.userData = json[0];
             this.isLogged.updateLogged(true);
+            this.isLogged.updateCpf(this.userData.cpf);
+            this.isLogged.updateName(this.userData.tech_name);
             this.$router.push({
               name: 'user',
               params: { cpf: this.userData.cpf, name: this.userData.tech_name }

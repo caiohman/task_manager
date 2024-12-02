@@ -1,7 +1,9 @@
 <template>
     <Card style="background-color:darkgray; width: 40%;">
             <template #content>
-                <DataTable v-model:expandedRows="expandedRows" :value="taskList" paginator :rows="5" dataKey="id" 
+                <DataTable v-model:expandedRows="expandedRows"  v-model:selection="selectedRow" 
+                        selectionMode="single"
+                        :value="taskList" paginator :rows="5" dataKey="id" 
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
                     <Column expander style="width: 5rem"/>  
                     <Column field="atm" :header= atm />
@@ -42,10 +44,12 @@
             const history = ref([]);
             const expandedRows = ref({});
 
+            const selectedRow = ref();
+
             const { t } = useI18n();
 
             return {
-                taskList, taskAllList, history, expandedRows, t
+                taskList, taskAllList, history, expandedRows, t, selectedRow
             };
         },
 
