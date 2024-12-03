@@ -205,6 +205,21 @@ app.post('/setnewtask', async (req, res) => {
   }
 });
 
+app.get('/listgeneralstatus', async (req , res) => {
+  try {
+    const query = `
+      select gs.id, gs.status_name as name from general_status gs;  
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

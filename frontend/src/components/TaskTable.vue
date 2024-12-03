@@ -1,7 +1,8 @@
 <template>
-    <Card style="background-color:darkgray; width: 40%;">
+    <Card style="background-color:darkgray; width: 50%;">
             <template #content>
-                <DataTable v-model:expandedRows="expandedRows"  v-model:selection="selectedRow" 
+                <DataTable v-model:expandedRows="expandedRows"  v-model:selection="selectedRow"
+                        v-model:editingRows="editingRows" editMode="cell" @cell-edit-complete="onCellEditSave" 
                         selectionMode="single"
                         :value="taskList" paginator :rows="5" dataKey="id" 
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
@@ -9,7 +10,11 @@
                     <Column field="atm" :header= atm />
                     <Column field="problem" :header= problem />
                     <Column field="type" :header= type />
-                    <Column field="status" :header= status />
+                    <Column field="status" :header= status >
+                        <template #editor="{ data, field }">
+                            <Select v-model="data[field]" :options="generalStatusList" optionLabel="name" />    
+                        </template>
+                    </Column>
                     <template #expansion="slotProps">
                         <div class="card-position">
                             <div class="timeline-position">
@@ -36,6 +41,9 @@
     export default {
         name: "TaskTable",
         emits: ["newTaskId"],
+        props: {
+            generalStatusList : { type: Array, required: false }
+        },
 
         setup() {
             const taskList = ref([]);
@@ -48,8 +56,10 @@
 
             const { t } = useI18n();
 
+            const editingRows = ref([]);
+
             return {
-                taskList, taskAllList, history, expandedRows, t, selectedRow
+                taskList, taskAllList, history, expandedRows, t, selectedRow, editingRows
             };
         },
 
@@ -108,6 +118,10 @@
 
             onRowCollapse(event) {
                 console.log(event);
+            },
+
+            onCellEditSave() {
+                console.log('Storing');
             }
         }
 

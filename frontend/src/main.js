@@ -17,6 +17,7 @@ import Timeline from 'primevue/timeline';
 import ToastService from 'primevue/toastservice';
 import Toast from 'primevue/toast';
 import { createPinia } from 'pinia';
+import Select from 'primevue/select';
 
 
 const pinia = createPinia();
@@ -50,7 +51,8 @@ component('Card', Card).
 component('Column', Column).
 component('DataTable', DataTable).
 component('Timeline', Timeline).
-component('Toast', Toast)
+component('Toast', Toast).
+component('Select', Select)
 
 router.isReady().then(() => {
   app.mount('#app')

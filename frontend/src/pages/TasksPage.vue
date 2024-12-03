@@ -93,12 +93,18 @@
                     </template>
                     </Select>
                 </section>
-                <section>
+                <section class="flex-column">
                     <h3>{{ type.toUpperCase() }}</h3>
                     <div class="radio-buttom-align">
-                        <div v-for="type in taskType" :key="type.id" >
+                        <div v-for="type in taskType" :key="type.id" class="radio-buttom-self">
                             <RadioButton v-model="selectedTaskType" :inputId="'' + type.id" name="dynamic" :value="type.task_type" />
-                            <label :for="'' + type.id" style="margin-right: 5%;">{{ type.task_type }}</label>
+                            <label :for="'' + type.id" style="margin-right: 5%;" >{{ type.task_type }}</label>
+                        </div>
+                    </div>
+                    <div class="radio-buttom-align">
+                        <div v-for="status in generalStatus" :key="status.id" class="radio-buttom-self">
+                            <RadioButton v-model="selectGeneralStatus" :inputId="'' + status.id" name="dynamic" :value="status.name" />
+                            <label :for="'' + status.id" style="margin-right: 5%;">{{ status.name }}</label>
                         </div>
                     </div>
                 </section>
@@ -110,7 +116,7 @@
                 </section>  
             </template>
         </Card>
-        <TaskTable class="field-relation" @new-task-id="(id) => newTaskId = id"/>
+        <TaskTable class="field-relation" :general-status-list="generalStatus"  @new-task-id="(id) => newTaskId = id"/>
     </div>
 </template>
 <script>
@@ -150,12 +156,16 @@
             const selectedTaskType = ref();
             const taskType = ref();
 
+            const generalStatus = ref();
+            const selectGeneralStatus = ref();
+
             const toast = useToast();
 
             const newTaskId = ref();
 
             return {
-                value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType, toast, newTaskId
+                value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType, toast, newTaskId,
+                 generalStatus, selectGeneralStatus
             };
         },
 
@@ -175,7 +185,8 @@
         beforeMount() {
             this.getAtmsList();   
             this.getProblemsList(); 
-            this.getTaskTypeList();    
+            this.getTaskTypeList();
+            this.getGeneralStatusList();   
         },
 
         methods: {
@@ -237,7 +248,7 @@
                         detail: this.t("tasks.taskCreated"), 
                         life: 3000 });
                 })
-                .catch(error => this.getnewTaskError(error)) 
+                .catch(error => this.getNewTaskError(error)) 
             },
 
             saveNewTaskValidation() {
@@ -253,11 +264,25 @@
                 }
             },
 
-            getnewTaskError(error) {
+            getNewTaskError(error) {
                 this.toast.add({ severity: 'error', 
                      summary: this.t("general.errorMessage"), 
                      detail: this.t("tasks.taskNotCreated"), 
                      life: 3000 }); 
+            },
+
+            async getGeneralStatusList() {
+                await fetch("http://localhost:8090/listgeneralstatus", {
+                    method: "GET",
+                    headers: {"Content-Type": "application/json"}, 
+                })
+                .then(response => response.json())
+                .then(json => this.addGeneralStatusList(json))
+                .catch(error => this.getUserError(error))    
+            },
+
+            addGeneralStatusList(json) {
+                this.generalStatus = json;
             }
         }
     }
@@ -282,7 +307,9 @@
 .radio-buttom-align {
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     flex-wrap: wrap;
+    width: 60%;
 }
 .field-relation {
     margin-right: 3%;
@@ -290,4 +317,12 @@
 .last-field-relation, .field-relation, .new-task{
     margin-bottom: 3%;
 }
+.radio-buttom-self {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+
 </style>

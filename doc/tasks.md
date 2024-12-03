@@ -28,6 +28,10 @@ Make visible pages options at navbar only after login
 
 After login, redirect icon to first page in case of user's click on icon.
 
+#### 07 - Change task status 
+
+Inside Task's table, offer the option to change task's status and save changes.
+
 
 # BackLog
 

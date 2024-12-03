@@ -5,3 +5,8 @@
 .timeline-position {
     width: 50%;
 }
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
