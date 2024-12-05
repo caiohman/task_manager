@@ -241,6 +241,42 @@ app.post('/settasknewstatus', async (req, res) => {
   }
 });
 
+app.get('/listpartstatus', async (req , res) => {
+  try {
+    const query = `
+      select ps.id, ps.status_name as name from part_status ps ;
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.post('/setnewstatuspart', async (req, res) => {
+  const { id, status } = req.body;
+   
+  try {
+    
+    const insertPartStatus = `
+      insert into parts_move_status (part, part_status, parts_date, parts_time) values 
+      ($1, $2, CURRENT_DATE, CURRENT_TIME)
+    `;
+
+    const valuesPartStatus = [id, status];
+
+    await pool.query(insertPartStatus, valuesPartStatus);
+
+    res.status(201).json({ message: "Created"});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response"});
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

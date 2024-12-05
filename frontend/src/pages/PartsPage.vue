@@ -2,8 +2,13 @@
     <h2>{{ parts }}</h2>
     <div class="card-position">
         <Card style="background-color:darkgray; width: 80%;">
+            <template #header>
+                <Toast />
+                <Button icon="pi pi-check" @click="save" style="margin: 2%;" />
+            </template>
             <template #content>
                 <DataTable v-model:expandedRows="expandedRows" :value="products" paginator :rows="5" dataKey="id" 
+                        editMode="cell" @cell-edit-complete="onCellEdit" 
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
                     <Column expander style="width: 5rem"/>    
                     <Column field="code" :header= codeHeader />
@@ -11,6 +16,9 @@
                     <Column :header= statusHeader >
                         <template #body="slotProps">
                             <Tag :value="slotProps.data.status" :severity="getStatus(slotProps.data)" />
+                        </template>
+                        <template #editor="{ data, field }">
+                            <Select v-model="data[field]" :options="partStatus" optionLabel="name" />    
                         </template>
                     </Column>
                     <Column field="atm" :header= atmHeader />
@@ -44,6 +52,7 @@
     import { useI18n } from 'vue-i18n';
     import Card from 'primevue/card';
     import Timeline from 'primevue/timeline';
+    import { useToast } from 'primevue/usetoast';
 
     export default {
         name: 'PartsPage',
@@ -59,10 +68,16 @@
             const products = ref([]);
             const { t } = useI18n();
             const expandedRows = ref({});
-            const history = ref([])
+            const history = ref([]);
+
+            const toast = useToast();
+
+            const saveNewStatus = ref(false);
+            const partStatus = ref([]);
 
             return {
-                products, t, expandedRows, history
+                products, t, expandedRows, history, 
+                toast, saveNewStatus
             };
         },
 
@@ -79,6 +94,7 @@
 
         beforeMount() {
             this.getPartsList();
+            this.getPartStatusOptions();
         },
 
         methods: {
@@ -139,7 +155,66 @@
 
             onRowCollapse(event) {
                 console.log(event);
+            },
+
+            onCellEdit(event) {
+                let { data, newValue, field } = event;
+
+                if(this.saveNewStatus) {
+                    if(newValue !== data[field] && newValue.name !== data[field]) {
+                        data[field] = newValue.name;
+                        this.setPartNewStatus(data.id, newValue.id);
+                        this.saveNewStatus = false; 
+                    }    
+                }
+            },
+
+            async setPartNewStatus(partId, status) {
+                await fetch("http://localhost:8090/setnewstatuspart", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({id: partId, status: status}), 
+                })
+                .then(response => {
+                    this.toast.add({ severity: 'success', 
+                        summary: this.t("general.successMessage"), 
+                        detail: this.t("parts.updatedPart"), 
+                        life: 3000 });
+                })
+                .catch(error => this.getPartNewStatusError(error)) 
+            },
+
+            getPartNewStatusError(error) {
+                this.toast.add({ severity: 'error', 
+                     summary: this.t("general.errorMessage"), 
+                     detail: this.t("parts.partNotUpdated"), 
+                     life: 3000 }); 
+            },
+
+
+            save() {
+                this.saveNewStatus = true;
+                console.log('Saving ...');
+            },
+
+            async getPartStatusOptions() {
+                await fetch("http://localhost:8090/listpartstatus", {
+                    method: "GET",
+                    headers: {"Content-Type": "application/json"}, 
+                })
+                .then(response => response.json())
+                .then(json => this.addPartStatusList(json))
+                .catch(error => this.getPartStatusError(error))
+            },
+
+            addPartStatusList(json) {
+                this.partStatus = json;
+            },
+
+            getPartStatusError(error) {
+                console.log(error);
             }
+
         }
     }
 </script>

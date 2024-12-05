@@ -19,7 +19,9 @@
     },
     "parts": {
       "parts": "Parts",
-      "codeHeader": "Code"
+      "codeHeader": "Code",
+      "updatedPart": "Updated Part",
+      "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again."
     },
     "tasks": {
       "tasks": "Tasks",

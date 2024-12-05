@@ -32,6 +32,10 @@ After login, redirect icon to first page in case of user's click on icon.
 
 Inside Task's table, offer the option to change task's status and save changes.
 
+#### 08 - Change part status
+
+Inside Part's table, offer the option to change part's status and save changes.
+
 
 # BackLog
 

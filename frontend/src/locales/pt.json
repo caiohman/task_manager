@@ -19,7 +19,10 @@
     },
     "parts": {
       "parts": "Peças",
-      "codeHeader": "Código"
+      "codeHeader": "Código",
+      "updatedPart": "Status da peça atualizado com sucesso",
+      "partNotUpdated": "Peça não pôde ser atualizada. Por favor atualize a página e tente novamente."
+
     },
     "tasks": {
       "tasks": "Chamados",
