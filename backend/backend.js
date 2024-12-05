@@ -6,7 +6,7 @@ const port = 8090;
 
 const pool = new Pool({
   user: 'postgres',
-  host: 'db',
+  host: '172.18.0.2',
   database: 'database',
   password: 'caio',
   port: 5432,
@@ -190,7 +190,7 @@ app.post('/setnewtask', async (req, res) => {
     const insertTechServiceStatus = `
       insert into tech_service_status (service_date, service_time, task, task_status, tech) values (
       CURRENT_DATE, CURRENT_TIME, $1 , 1, '000.000.000-00');
-    `
+    `;
 
     const valuesTask = [id, atm, problem, type];
     const valuesTechServiceStatus = [id];
@@ -219,6 +219,28 @@ app.get('/listgeneralstatus', async (req , res) => {
     res.status(500).json({ error: "Error response" });
   }
 });
+
+app.post('/settasknewstatus', async (req, res) => {
+  const { id, status } = req.body;
+   
+  try {
+    
+    const insertTechServiceStatus = `
+      insert into tech_service_status (service_date, service_time, task, task_status, tech) values (
+      CURRENT_DATE, CURRENT_TIME, $1 , $2, '000.000.000-00');
+    `;
+
+    const valuesTechServiceStatus = [id, status];
+
+    await pool.query(insertTechServiceStatus, valuesTechServiceStatus);
+
+    res.status(201).json({ message: "Created"});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response"});
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
