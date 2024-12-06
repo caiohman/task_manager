@@ -147,6 +147,7 @@
                 
                 for(let part of history) {
                     part.date = part.date.split("T")[0];
+                    part.time = part.time.split(".")[0];
                 }
 
                 history.push({time: '', date: ''}); // TODO: this is a workarout for timeline error. 
@@ -214,7 +215,6 @@
             getPartStatusError(error) {
                 console.log(error);
             }
-
         }
     }
 </script>

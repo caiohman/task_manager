@@ -1,8 +1,6 @@
 <template>
-    <h2>{{ tasks }}</h2>
-    <div class="new-task">
-        <Card style="width: 35%; background-color:darkgray;" class="field-relation">
-            <template #content >
+    <div class="new-task">     
+        <Fieldset :legend="tasks" class="field-relation" style="width: 35%">   
                 <h3>{{  atm.toUpperCase() }}</h3>
                 <section class="new-task">
                     <Select v-model="selectedAtm" filter :options="atms" optionLabel="atm" :placeholder= atm  class="field-relation">
@@ -114,13 +112,12 @@
                     <Button icon="pi pi-plus" class="field-relation" @click="saveNewTaskValidation"/>
                     <Button icon="pi pi-search" class="field-relation"/>
                 </section>  
-            </template>
-        </Card>
+        
+        </Fieldset>
         <TaskTable class="field-relation" :general-status-list="generalStatus"  @new-task-id="(id) => newTaskId = id"/>
     </div>
 </template>
 <script>
-    import Card from 'primevue/card';
     import InputNumber from 'primevue/inputnumber';
     import FloatLabel from 'primevue/floatlabel';
     import Select from 'primevue/select';
@@ -130,17 +127,18 @@
     import RadioButton from 'primevue/radiobutton';
     import TaskTable from '../components/TaskTable.vue';
     import { useToast } from 'primevue/usetoast';
+    import Fieldset from 'primevue/fieldset';
 
     export default {
         name: 'TaskPage',
         components: {
-            Card,
             InputNumber,
             Select,
             FloatLabel,
             Button,
             RadioButton, 
-            TaskTable
+            TaskTable,
+            Fieldset
         },
 
         setup() {
@@ -292,6 +290,7 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin: 2%;
 }
 .header-text {
     display: flex;
