@@ -1,7 +1,10 @@
 <template>
-    <h1>{{ name }}</h1>
+    <div class="profile-align">
+        <img :src="image" style="width: 5%; border-radius:50%; margin: 2%" />
+        <h3>{{ name }}</h3>
+    </div> 
     <div >
-        <DatePicker v-model="date" inline dateFormat="yy-mm-dd">
+        <DatePicker v-model="date" inline dateFormat="yy-mm-dd" style="margin: 2%;">
             <template #date="slotProps">
                 <strong v-if="findDayOff(slotProps.date) === true" style="color: red">{{ slotProps.date.day }}</strong>
                 <template v-else>{{ slotProps.date.day }}</template>
@@ -43,7 +46,8 @@
         data() {
             return {
                 dayOff: [],
-                date : null
+                date : null,
+                image: (this.name.includes('Caio')) ? '/src/assets/profiles/caio.jpg' : '/src/assets/profiles/tecban.png'
             }
         },
 
@@ -147,3 +151,11 @@
         }
     }
 </script>
+<style>
+.profile-align {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+</style>

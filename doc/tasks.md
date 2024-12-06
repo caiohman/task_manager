@@ -36,6 +36,10 @@ Inside Task's table, offer the option to change task's status and save changes.
 
 Inside Part's table, offer the option to change part's status and save changes.
 
+#### 09 - Add image profile
+
+At user first page, add image profile and align with tech name.
+
 
 # BackLog
 
