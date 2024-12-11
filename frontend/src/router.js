@@ -4,6 +4,7 @@ import UserFirstPage from './pages/UserFirstPage.vue'
 import HomePage from './pages/HomePage.vue'
 import PartsPage from './pages/PartsPage.vue'
 import TasksPage from './pages/TasksPage.vue'
+import AtmPage from './pages/AtmPage.vue'
 
 
 const routes = [
@@ -32,6 +33,12 @@ const routes = [
         name: 'tasks', 
         component: TasksPage,
         props: true 
+    },
+    {
+        path: '/atms/',
+        name: 'atms',
+        component: AtmPage,
+        props: true
     }
 ]
 

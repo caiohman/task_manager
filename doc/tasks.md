@@ -40,6 +40,11 @@ Inside Part's table, offer the option to change part's status and save changes.
 
 At user first page, add image profile and align with tech name.
 
+#### 10 - Create Atms Page
+
+This page should contain fields to insert new atm to db.
+
+
 
 # BackLog
 

@@ -1,5 +1,5 @@
 <template>
-    <div class="new-task">     
+    <div class="flex-row" style="justify-content: space-evenly" >    
         <Fieldset :legend="tasks" class="field-relation" style="width: 35%">   
                 <h3>{{  atm.toUpperCase() }}</h3>
                 <section class="new-task">
@@ -295,12 +295,6 @@
 .header-text {
     display: flex;
     justify-content: center;
-    
-}
-.options-line {
-    display: flex;
-    flex-direction: row;
-    justify-content: end;
     
 }
 .radio-buttom-align {

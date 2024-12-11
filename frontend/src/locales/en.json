@@ -15,7 +15,8 @@
       "save": "Save",
       "cancel": "Cancel",
       "dateExists": "Date already exists.",
-      "dateAdded": "Date Added."
+      "dateAdded": "Date Added.",
+      "userSpace": "User"
     },
     "parts": {
       "parts": "Parts",
@@ -42,5 +43,16 @@
       "errorMessage": "Error Message",
       "successMessage": "Success Message",
       "serverError": "Server Error"
+    },
+    "atms": {
+      "atms": "Atms",
+      "selectRegion": "Region",
+      "selectModels": "Model",
+      "errorEmpty": "Please insert value",
+      "atmCreated": "Atm Created",
+      "atmExists": "Atm already exists",
+      "atmNumber": "Atm",
+      "coordinates": "Coordinates",
+      "addressName": "Adress Name"
     }
   }

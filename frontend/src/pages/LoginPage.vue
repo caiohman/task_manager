@@ -1,6 +1,6 @@
 <template>
     <div class="screen-size screen-item-position">
-      <Card class="card-position card-dimension" style="background-color:darkgray">
+      <Card class="card-position card-dimension" style="background-color:black">
         <template #header>
           <div class="logo-position">
             <!-- <img alt="company name" :src="cardImage" class="logo"  /> -->
@@ -23,8 +23,8 @@
         </template>
         <template #footer>
             <div class="footer-itens-position">
-              <Button severity="secondary" outlined class="w-full" @click="validaterUserBackend" > {{ t("login.login") }} </Button>
-              <Button class="w-full" > {{ t("login.register") }} </Button>
+              <Button @click="validaterUserBackend" > {{ t("login.login") }} </Button>
+              <Button > {{ t("login.register") }} </Button>
             </div>
         </template>
       </Card>

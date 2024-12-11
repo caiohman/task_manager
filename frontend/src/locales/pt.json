@@ -15,7 +15,8 @@
       "save": "Salvar",
       "cancel": "Cancelar",
       "dateExists": "Data já existe.",
-      "dateAdded": "Data adicionada."
+      "dateAdded": "Data adicionada.",
+      "userSpace": "Usuário"
     },
     "parts": {
       "parts": "Peças",
@@ -43,5 +44,16 @@
       "errorMessage": "Mensagem de Erro",
       "successMessage": "Mensagem de Sucesso",
       "serverError": "Erro no servidor."
+    },
+    "atms": {
+      "atms": "Atms",
+      "selectRegion": "Bairro",
+      "selectModels": "Modelo",
+      "errorEmpty": "Por favor insira valores nos campos",
+      "atmCreated": "Atm Criada",
+      "atmExists": "Atm com esse número já existe",
+      "atmNumber": "Atm",
+      "coordinates": "Coordenadas",
+      "addressName": "Nome"
     }  
   }

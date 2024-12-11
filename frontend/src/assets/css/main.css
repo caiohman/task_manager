@@ -10,3 +10,27 @@
     flex-direction: column;
     flex-wrap: wrap;
 }
+
+.flex-row, .options-line {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.space-below {
+    margin-bottom: 3%;
+}
+
+.page-margin-left {
+    margin-left: 2%;
+}
+
+.options-line {
+    justify-content: end;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}

@@ -277,6 +277,58 @@ app.post('/setnewstatuspart', async (req, res) => {
   }
 });
 
+app.get('/listregion', async (req , res) => {
+  try {
+    const query = `
+      select id, region_name as name from region r;
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.get('/listmodels', async (req , res) => {
+  try {
+    const query = `
+      select id, model_name as name from atm_models am;
+    `;
+
+    const { rows } = await pool.query(query);
+    console.log(rows);
+    res.status(201).json(rows);
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.post('/setnewatm', async (req, res) => {
+  const { id, coordinates, region, model, name } = req.body;
+   
+  try {
+    
+    const insertAtm = `
+      insert into atm (id, position, region,  model, atm_name) values
+      ($1, $2, $3, $4, $5);
+    `;
+
+    const valuesNewAtm = [id, coordinates, region, model, name];
+
+    await pool.query(insertAtm, valuesNewAtm);
+
+    res.status(201).json({ message: "Created"});
+  } catch (error) {
+    console.error(error);
+    (error.code === '23505') ? res.status(400).json({ error: "Atm already exists." }) : 
+    res.status(500).json({ error: "Error response"});
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

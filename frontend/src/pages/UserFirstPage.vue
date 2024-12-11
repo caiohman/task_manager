@@ -1,6 +1,6 @@
 <template>
     <div class="profile-align">
-        <img :src="image" style="width: 5%; border-radius:50%; margin: 2%" />
+        <img :src="image" style="width: 5%; border-radius:50%; margin-right: 1%;" class="page-margin-left" />
         <h3>{{ name }}</h3>
     </div> 
     <div >

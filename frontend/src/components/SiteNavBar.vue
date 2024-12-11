@@ -1,15 +1,18 @@
 <template>
-    <Toolbar>
+    <Toolbar class="space-below">
         <template #start>
             <template v-if="isLogged.logged">
               <RouterLink :to="{ name: 'user', params: { cpf: isLogged.cpf , name: isLogged.name }}">
-                <Button v-tooltip.bottom="login" icon="pi pi-user" class="mr-2" severity="secondary" text />
+                <Button v-tooltip.bottom="userSpace" icon="pi pi-user" class="mr-2" severity="secondary" text />
               </RouterLink>
               <RouterLink to="/parts">
                 <Button v-tooltip.bottom="parts" icon="pi pi-wrench" class="mr-2" severity="secondary" text />
               </RouterLink>
               <RouterLink to="/tasks">
                 <Button v-tooltip.bottom="tasks" icon="pi pi-briefcase" class="mr-2" severity="secondary" text />
+              </RouterLink>
+              <RouterLink to="/atms">
+                <Button v-tooltip.bottom="atms" icon="pi pi-building-columns" severity="secondary" text />
               </RouterLink>
             </template>
             <template v-else>
@@ -67,7 +70,9 @@
         return {
           login: this.t("login.login"),
           parts: this.t("parts.parts"),
-          tasks: this.t("tasks.tasks")
+          tasks: this.t("tasks.tasks"),
+          atms: this.t("atms.atms"),
+          userSpace: this.t("userFirstPage.userSpace") 
         }
 
       },
