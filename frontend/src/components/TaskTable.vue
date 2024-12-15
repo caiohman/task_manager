@@ -2,11 +2,10 @@
     <Card style="background-color:darkgray; width: 50%;">
         <template #header>
             <Toast />
-            <Button icon="pi pi-check" @click="save" style="margin: 2%;" />
+            <Button icon="pi pi-check" @click="save" style="margin: 2%;" :disabled=disableSaveButton />
         </template>
             <template #content>
                 <DataTable v-model:expandedRows="expandedRows"  v-model:selection="selectedRow"
-                        editMode="cell" @cell-edit-complete="onCellEdit" 
                         selectionMode="single"
                         :value="taskList" paginator :rows="5" dataKey="id" 
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
@@ -15,11 +14,12 @@
                     <Column field="problem" :header= problem />
                     <Column field="type" :header= type />
                     <Column field="status" :header= status >
-                        <template #editor="{ data, field }">
-                            <Select v-model="data[field]" :options="generalStatusList" optionLabel="name" />    
-                        </template>
+                        <template #body="{ data, field }">
+                            <Select v-model="data[field]" :options="generalStatusList" optionLabel="name" optionValue="name" 
+                                    :placeholder=data.status v-on:change="event => updateChangedRow(event, data)" />   
+                        </template>        
                     </Column>
-                    <template #expansion="slotProps">
+                    <template #expansion="slotProps">   
                         <div class="card-position">
                             <div class="timeline-position">
                                 <Timeline :value="history" layout="horizontal" align="top">
@@ -61,13 +61,15 @@
 
             const { t } = useI18n();
 
-            const saveNewStatus = ref(false);
-
             const toast = useToast();
+
+            const changedRow = ref();
+
+            const disableSaveButton = ref(true);
 
             return {
                 taskList, taskAllList, history, expandedRows, t,
-                 selectedRow, saveNewStatus, toast
+                 selectedRow, toast, changedRow, disableSaveButton
             };
         },
 
@@ -129,23 +131,6 @@
                 console.log(event);
             },
 
-            onCellEdit(event) {
-                let { data, newValue, field } = event;
-
-                if(this.saveNewStatus) {
-                    if(newValue !== data[field] && newValue.name !== data[field]) {
-                    data[field] = newValue.name;
-                    this.setTaskNewStatus(data.id, newValue.id);
-                    this.saveNewStatus = false; 
-
-                    } else {
-                        console.log('Nothing changed');
-                        this.saveNewStatus = false;
-                    }
-                }
-
-            },
-
             async setTaskNewStatus(taskId, status ) {
                 await fetch("http://localhost:8090/settasknewstatus", {
                     method: "POST",
@@ -169,8 +154,12 @@
             },
 
             save() {
-                this.saveNewStatus = true;
-                console.log('Saving ...');
+                this.setTaskNewStatus(this.changedRow.id, this.changedRow.status);
+            },
+
+            updateChangedRow(event, data) {
+                this.changedRow = data;
+                this.disableSaveButton = false;
             }
         }
 

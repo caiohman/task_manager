@@ -1,98 +1,95 @@
 <template>
     <div class="flex-row" style="justify-content: space-evenly" >    
-        <Fieldset :legend="tasks" class="field-relation" style="width: 35%">   
-                <h3>{{  atm.toUpperCase() }}</h3>
-                <section class="new-task">
-                    <Select v-model="selectedAtm" filter :options="atms" optionLabel="atm" :placeholder= atm  class="field-relation">
-                    <template #value="slotProps">
-                        <div v-if="slotProps.value" class="flex items-center">
-                            <div>{{ slotProps.value.atm }}</div>
-                        </div>
-                        <span v-else>
-                            {{ slotProps.placeholder }}
-                        </span>    
-         
-                    </template>
-                    <template #option="slotProps">
-                        <div class="flex items-center">
-                            <div>{{ slotProps.option.atm }}</div>
-                        </div>
-                    </template>
+        <Fieldset :legend="tasks" class="field-relation" style="width: 35%; height: fit-content;">   
+                <section class="flex-row">
+                    <Select v-model="selectedAtm" filter :options="atms" optionLabel="atm" 
+                            :placeholder= atm  style="width: 30%;" size="small" class="field-relation">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value">
+                                <div>{{ slotProps.value.atm }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>    
+                        </template>
+                        <template #option="slotProps">
+                            <div>
+                                <div>{{ slotProps.option.atm }}</div>
+                            </div>
+                        </template>
                     </Select>
 
-                    <Select v-model="selectedAtm" filter :options="atms" optionLabel="name" :placeholder= atmName  class="field-relation">
-                    <template #value="slotProps">
-                        <div v-if="slotProps.value" class="flex items-center">
-                            <div>{{ slotProps.value.name }}</div>
-                        </div>
-                        <span v-else>
-                            {{ slotProps.placeholder }}
-                        </span>    
-                    
-                    </template>
-                    <template #option="slotProps">
-                        <div class="flex items-center">
-                            <div>{{ slotProps.option.name }}</div>
-                        </div>
-                    </template>
+                    <Select v-model="selectedAtm" filter :options="atms" optionLabel="name"
+                            :placeholder= atmName size="small" class="field-relation" style="width: 30%;">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value">
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>                       
+                        </template>
+                        <template #option="slotProps">
+                            <div>
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
                     </Select>
 
-                    <Select v-model="selectedAtm" filter :options="atms" optionLabel="neighborhood" :placeholder= atmNeighborhood class="last-field-relation">
-                    <template #value="slotProps">
-                        <div v-if="slotProps.value" class="flex items-center">
-                            <div>{{ slotProps.value.neighborhood }}</div>
-                        </div>
-                        <span v-else>
-                            {{ slotProps.placeholder }}
-                        </span>    
-                    
-                    </template>
-                    <template #option="slotProps">
-                        <div class="flex items-center">
-                            <div>{{ slotProps.option.neighborhood }}</div>
-                        </div>
-                    </template>
+                    <Select v-model="selectedAtm" filter :options="atms" optionLabel="neighborhood" 
+                            :placeholder= atmNeighborhood size="small" class="last-field-relation" style="width: 30%;">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value">
+                                <div>{{ slotProps.value.neighborhood }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>                        
+                        </template>
+                        <template #option="slotProps">
+                            <div>
+                                <div>{{ slotProps.option.neighborhood }}</div>
+                            </div>
+                        </template>
                     </Select>
                 </section>
 
                 <section>
-                    <h3>{{ problem.toUpperCase() }}</h3>
-                    <Select v-model="selectedProblems" filter :options="problems" optionLabel="problem" :placeholder= problem  class="field-relation">
-                    <template #value="slotProps">
-                        <div v-if="slotProps.value" class="flex items-center">
-                            <div>{{ slotProps.value.problem }}</div>
-                        </div>
-                        <span v-else>
-                            {{ slotProps.placeholder }}
-                        </span>    
-                    
-                    </template>
-                    <template #option="slotProps">
-                        <div class="flex items-center">
-                            <div>{{ slotProps.option.problem }}</div>
-                        </div>
-                    </template>
+                    <Select v-model="selectedProblems" filter :options="problems" optionLabel="problem" 
+                            :placeholder= problem size="small" class="field-relation" style="width: 30%;">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value">
+                                <div>{{ slotProps.value.problem }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>                        
+                        </template>
+                        <template #option="slotProps">
+                            <div>
+                                <div>{{ slotProps.option.problem }}</div>
+                            </div>
+                        </template>
                     </Select>
 
-                    <Select v-model="selectedProblems" filter :options="problems" optionLabel="name" :placeholder= problemName  class="field-relation">
-                    <template #value="slotProps">
-                        <div v-if="slotProps.value" class="flex items-center">
-                            <div>{{ slotProps.value.name }}</div>
-                        </div>
-                        <span v-else>
-                            {{ slotProps.placeholder }}
-                        </span>    
-                    
-                    </template>
-                    <template #option="slotProps">
-                        <div class="flex items-center">
-                            <div>{{ slotProps.option.name }}</div>
-                        </div>
-                    </template>
+                    <Select v-model="selectedProblems" filter :options="problems" optionLabel="name" 
+                            :placeholder= problemName size="small" class="field-relation" style="width: 30%;">
+                        <template #value="slotProps">
+                            <div v-if="slotProps.value">
+                                <div>{{ slotProps.value.name }}</div>
+                            </div>
+                            <span v-else>
+                                {{ slotProps.placeholder }}
+                            </span>    
+                        </template>
+                        <template #option="slotProps">
+                            <div>
+                                <div>{{ slotProps.option.name }}</div>
+                            </div>
+                        </template>
                     </Select>
                 </section>
                 <section class="flex-column">
-                    <h3>{{ type.toUpperCase() }}</h3>
                     <div class="radio-buttom-align">
                         <div v-for="type in taskType" :key="type.id" class="radio-buttom-self">
                             <RadioButton v-model="selectedTaskType" :inputId="'' + type.id" name="dynamic" :value="type.task_type" />
@@ -286,12 +283,6 @@
     }
 </script>
 <style>
-.new-task {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin: 2%;
-}
 .header-text {
     display: flex;
     justify-content: center;

@@ -44,6 +44,9 @@ At user first page, add image profile and align with tech name.
 
 This page should contain fields to insert new atm to db.
 
+#### 11 - Refactor Tasks Table to improve usability
+
+Change status column to show the client that is possible to change the values.
 
 
 # BackLog

@@ -227,7 +227,7 @@ app.post('/settasknewstatus', async (req, res) => {
     
     const insertTechServiceStatus = `
       insert into tech_service_status (service_date, service_time, task, task_status, tech) values (
-      CURRENT_DATE, CURRENT_TIME, $1 , $2, '000.000.000-00');
+      CURRENT_DATE, CURRENT_TIME, $1 , (select id from general_status where status_name = $2), '000.000.000-00');
     `;
 
     const valuesTechServiceStatus = [id, status];
