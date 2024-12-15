@@ -1,7 +1,7 @@
 <template>
     <section class="flex-row" style="justify-content: space-evenly">
         <img :src=image alt="Aligned Atms" style="width: 35%;" class="page-margin-left" />
-        <Fieldset :legend="atms" style="width: 30%; margin-left: 3%;" >
+        <Fieldset :legend="atms" style="width: 30%; margin-left: 3%; height: fit-content" >
             <div class="flex-column">
                 <InputFilter :field="region" :placeholder="selectRegion" class="space-below" 
                     :submitted="submitted" @select-option="(option) => validateField(option, field[0].id)"/>
