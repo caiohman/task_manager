@@ -22,7 +22,10 @@
       "parts": "Parts",
       "codeHeader": "Code",
       "updatedPart": "Updated Part",
-      "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again."
+      "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again.",
+      "requestPart": "Request Part",
+      "partRequested": "Part Requested"
+
     },
     "tasks": {
       "tasks": "Tasks",

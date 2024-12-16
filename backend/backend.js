@@ -19,11 +19,11 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
      
     if (!username) {
-      return res.status(400).json({ error: "Missing username"});
+      return res.status(400).json({ error: "Missing username" });
     }
 
     if (!password) {
-      return res.status(400).json({ error: "Missing password"});
+      return res.status(400).json({ error: "Missing password" });
     }
   
     try {
@@ -41,7 +41,7 @@ app.post('/login', async (req, res) => {
       res.status(201).json(rows);
     } catch (error) {
       console.error(error);
-      res.status(500).json({ error: "Error response"});
+      res.status(500).json({ error: "Error response" });
     }
 });
 
@@ -61,7 +61,7 @@ app.post('/getdayoff', async (req , res) => {
     res.status(201).json(rows);  
   }catch(error) {
     console.error(error);
-    res.status(500).json({ error: "Error response"});
+    res.status(500).json({ error: "Error response" });
   }
     
 });
@@ -174,7 +174,7 @@ app.post('/listtasks', async (req , res) => {
     res.status(201).json(rows);  
   }catch(error) {
     console.error(error);
-    res.status(500).json({ error: "Error response"});
+    res.status(500).json({ error: "Error response" });
   }    
 });
 
@@ -198,10 +198,10 @@ app.post('/setnewtask', async (req, res) => {
     await pool.query(insertTask, valuesTask);
     await pool.query(insertTechServiceStatus, valuesTechServiceStatus);
 
-    res.status(201).json({ message: "Created"});
+    res.status(201).json({ message: "Created" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error response"});
+    res.status(500).json({ error: "Error response" });
   }
 });
 
@@ -234,7 +234,7 @@ app.post('/settasknewstatus', async (req, res) => {
 
     await pool.query(insertTechServiceStatus, valuesTechServiceStatus);
 
-    res.status(201).json({ message: "Created"});
+    res.status(201).json({ message: "Created" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error response"});
@@ -270,10 +270,10 @@ app.post('/setnewstatuspart', async (req, res) => {
 
     await pool.query(insertPartStatus, valuesPartStatus);
 
-    res.status(201).json({ message: "Created"});
+    res.status(201).json({ message: "Created" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: "Error response"});
+    res.status(500).json({ error: "Error response" });
   }
 });
 
@@ -321,14 +321,73 @@ app.post('/setnewatm', async (req, res) => {
 
     await pool.query(insertAtm, valuesNewAtm);
 
-    res.status(201).json({ message: "Created"});
+    res.status(201).json({ message: "Created" });
   } catch (error) {
     console.error(error);
     (error.code === '23505') ? res.status(400).json({ error: "Atm already exists." }) : 
-    res.status(500).json({ error: "Error response"});
+    res.status(500).json({ error: "Error response" });
   }
 });
 
+app.post('/listpartsatm', async (req, res) => {
+  const { atm } = req.body;
+   
+  try {
+    
+    const getPartsAtm = `
+      select pc.partnumber, pc.part_name as name
+      from parts_catalog pc 
+      join part_model pm on pm.part = pc.partnumber
+      join atm_models am on am.id = pm.model  
+      join atm on atm.model = pm.model 
+      where atm.id = $1; 
+    `;
+
+    const valuesPartAtm = [atm];
+
+    const { rows } = await pool.query(getPartsAtm, valuesPartAtm);
+    console.log(rows);
+    res.status(201).json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.post('/setpartsatm', async (req, res) => {
+  const { partnumber, taskId } = req.body;
+   
+  try {
+    
+    const createPart = `
+      insert into parts (partnumber) values 
+      ($1); 
+    `;
+
+    const bindTask = `
+      insert into part_task (part, task) values 
+      (( select count(id) from parts ), $1);
+    
+    `;
+
+    const addMoveStatus = `
+      insert into parts_move_status (part, part_status, parts_date, parts_time) values
+      (( select count(id) from parts ), 1, CURRENT_DATE, CURRENT_TIME);
+    `;
+
+    const valuesCreatePart = [partnumber];
+    const valueBindTask = [taskId];
+
+    await pool.query(createPart, valuesCreatePart);
+    await pool.query(bindTask, valueBindTask);
+    await pool.query(addMoveStatus);
+    
+    res.status(201).json({ message: "Created" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

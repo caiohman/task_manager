@@ -48,6 +48,10 @@ This page should contain fields to insert new atm to db.
 
 Change status column to show the client that is possible to change the values.
 
+#### 12 - Add part request from task table
+
+Create a button to request part from task table
+
 
 # BackLog
 

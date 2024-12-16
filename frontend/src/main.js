@@ -19,6 +19,7 @@ import Toast from 'primevue/toast';
 import { createPinia } from 'pinia';
 import Select from 'primevue/select';
 import Button from 'primevue/button';
+import Dialog from 'primevue/dialog';
 
 
 const pinia = createPinia();
@@ -54,7 +55,8 @@ component('DataTable', DataTable).
 component('Timeline', Timeline).
 component('Toast', Toast).
 component('Select', Select).
-component('Button', Button)
+component('Button', Button).
+component('Dialog', Dialog)
 
 router.isReady().then(() => {
   app.mount('#app')

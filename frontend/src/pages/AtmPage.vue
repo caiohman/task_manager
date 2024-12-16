@@ -153,7 +153,7 @@
                         headers: {"Content-Type": "application/json"}, 
                         body: JSON.stringify({id: this.atmNumber, coordinates: this.coordinates, 
                          region: this.selectedRegion.id , model: this.selectedModel.id,
-			 name: this.addressName }), 
+			             name: this.addressName }), 
                     })
                     .then(response => {
                         if(response.status === 400) {

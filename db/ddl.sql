@@ -1,11 +1,11 @@
 create table if not exists region (
-id integer,
+id serial,
 region_name varchar(255) not null ,
 primary key(id)
 );
 
 create table if not exists atm_models (
-id integer,
+id serial,
 model_name varchar(255) not null,
 primary key(id)  
 );
@@ -70,7 +70,7 @@ constraint fk_atm_model foreign key(model) references atm_models(id)
 );
 
 create table if not exists parts (
-id integer,
+id serial,
 partnumber integer,
 primary key(id),
 constraint fk_parts_partnumber foreign key(partnumber) references parts_catalog(partnumber)
@@ -153,7 +153,7 @@ constraint fk_car_service_car foreign key(car) references car(id)
 );
 
 create table if not exists part_task (
-id integer,       
+id serial,       
 part integer, 
 task integer,
 primary key(id),
