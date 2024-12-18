@@ -1,24 +1,34 @@
 <template>
-    <h2>{{ parts }}</h2>
     <div class="card-position">
         <Card style="background-color:darkgray; width: 80%;">
             <template #header>
                 <Toast />
-                <Button icon="pi pi-check" @click="save" style="margin: 2%;" />
+                <Button icon="pi pi-check" @click="save" style="margin: 2%;" :disabled=disableSaveButton />
             </template>
             <template #content>
-                <DataTable v-model:expandedRows="expandedRows" :value="products" paginator :rows="5" dataKey="id" 
-                        editMode="cell" @cell-edit-complete="onCellEdit" 
+                <DataTable v-model:expandedRows="expandedRows" :value="products" paginator :rows="5" dataKey="id"  
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
                     <Column expander style="width: 5rem"/>    
                     <Column field="code" :header= codeHeader />
                     <Column field="name" :header= nameHeader />
                     <Column :header= statusHeader >
-                        <template #body="slotProps">
-                            <Tag :value="slotProps.data.status" :severity="getStatus(slotProps.data)" />
-                        </template>
-                        <template #editor="{ data, field }">
-                            <Select v-model="data[field]" :options="partStatus" optionLabel="name" />    
+                        <template #body="{ data, field }">
+                            <Select v-model="data[field]" :options="partStatus"
+                                    :placeholder=data.status v-on:change="event => updateChangedRow(event, data)" > 
+                                <template #value="slotProps">
+                                    <div v-if="slotProps.value">
+                                        <Tag :value="slotProps.value.name" :severity="getStatus(slotProps.value)" />
+                                    </div>
+                                    <div v-else>
+                                        <Tag :value="slotProps.placeholder" :severity="getStatus(slotProps.placeholder)" />
+                                    </div>    
+                                </template>
+                                <template #option="slotProps">
+                                    <div>
+                                        <Tag :value="slotProps.option.name" :severity="getStatus(slotProps.option)" />
+                                    </div>
+                                </template>    
+                            </Select>
                         </template>
                     </Column>
                     <Column field="atm" :header= atmHeader />
@@ -72,12 +82,14 @@
 
             const toast = useToast();
 
-            const saveNewStatus = ref(false);
             const partStatus = ref([]);
+            const changedRow = ref();
+
+            const disableSaveButton = ref(true);
 
             return {
                 products, t, expandedRows, history, 
-                toast, saveNewStatus
+                toast, partStatus, changedRow, disableSaveButton
             };
         },
 
@@ -158,16 +170,9 @@
                 console.log(event);
             },
 
-            onCellEdit(event) {
-                let { data, newValue, field } = event;
-
-                if(this.saveNewStatus) {
-                    if(newValue !== data[field] && newValue.name !== data[field]) {
-                        data[field] = newValue.name;
-                        this.setPartNewStatus(data.id, newValue.id);
-                        this.saveNewStatus = false; 
-                    }    
-                }
+            updateChangedRow(event, data) {
+                this.changedRow = data;
+                this.disableSaveButton = false;
             },
 
             async setPartNewStatus(partId, status) {
@@ -194,8 +199,7 @@
 
 
             save() {
-                this.saveNewStatus = true;
-                console.log('Saving ...');
+                this.setPartNewStatus(this.changedRow.id, this.changedRow.undefined.id);
             },
 
             async getPartStatusOptions() {

@@ -52,6 +52,10 @@ Change status column to show the client that is possible to change the values.
 
 Create a button to request part from task table
 
+#### 13 - Refactor Parts table to improve usability
+
+Same as task 11, but keeping tags.
+
 
 # BackLog
 
