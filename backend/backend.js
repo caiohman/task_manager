@@ -389,6 +389,28 @@ app.post('/setpartsatm', async (req, res) => {
   }
 });
 
+app.post('/getalldayoff', async (req , res) => {
+  const { cpf } = req.body;
+
+  try {
+    const query = `
+      select t.tech_name as name, do2.day_off_date 
+      from day_off do2
+      join tech t on t.cpf = do2.cpf
+      where do2.cpf != $1;
+    `;
+
+    const values = [cpf];
+  
+    const { rows } = await pool.query(query, values);
+    console.log(rows);
+    res.status(201).json(rows);  
+  }catch(error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

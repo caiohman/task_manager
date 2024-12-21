@@ -1,13 +1,15 @@
 <template>
     <div class="profile-align">
-        <img :src="image" style="width: 5%; border-radius:50%; margin-right: 1%;" class="page-margin-left" />
+        <img :src="image" style="width: 5%; height: 5%; border-radius:50%; margin-right: 1%;" class="page-margin-left" />
         <h3>{{ name }}</h3>
     </div> 
-    <div >
-        <DatePicker v-model="date" inline dateFormat="yy-mm-dd" style="margin: 2%;">
+    <div class="card-position">
+        <DatePicker v-model="date" inline dateFormat="yy-mm-dd" style="margin: 2%; width: 30%;">
             <template #date="slotProps">
-                <strong v-if="findDayOff(slotProps.date) === true" style="color: red">{{ slotProps.date.day }}</strong>
-                <template v-else>{{ slotProps.date.day }}</template>
+                <div v-tooltip.bottom="findCoworkers(slotProps.date)">
+                    <strong v-if="findDayOff(slotProps.date, dayOff) === true" style="color: red">{{ slotProps.date.day }}</strong>
+                    <template v-else>{{ slotProps.date.day }}</template>
+                </div>
             </template>
         </DatePicker>
         <ConfirmDialog />
@@ -21,6 +23,7 @@
     import Button from 'primevue/button';
     import { useI18n } from 'vue-i18n';
     import { useToast } from 'primevue/usetoast';
+    import { ref } from 'vue';
 
     export default {
         name: 'UserFirstPage',
@@ -37,9 +40,12 @@
         setup() {
             const { t } = useI18n();
             const toast = useToast();
+            const coworkersName = ref([]);
+            const techsDayOff = ref([]);
+
 
             return {
-                t, toast
+                t, toast, coworkersName, techsDayOff 
             } 
         },
 
@@ -52,16 +58,14 @@
         },
 
         beforeMount() {
-            this.getUserDayOff()
+            this.getUserDayOff();
+            this.getAlllUsersDayOff();
         },
 
         methods: {
-            findDayOff(date) {
-                for(let i = 0; i < this.dayOff.length; i++) {
-                    if(Number(this.dayOff[i].day) === date.day &&
-                        Number(this.dayOff[i].month) === (date.month + 1) &&
-                        Number(this.dayOff[i].year) === date.year
-                    ) return true   
+            findDayOff(date, dayOff) {
+                for(let i = 0; i < dayOff.length; i++) {
+                    if(this.validateDate(dayOff[i], date)) return true;
                 }
                 return false
             },
@@ -70,7 +74,7 @@
                 await fetch("http://localhost:8090/getdayoff", {
                     method: "POST",
                     headers: {"Content-Type": "application/json",}, 
-                    body: JSON.stringify({ cpf: this.cpf}),
+                    body: JSON.stringify({ cpf: this.cpf }),
                 })
                 .then(response => response.json())
                 .then(json => this.separateData(json))
@@ -93,7 +97,7 @@
                 await fetch("http://localhost:8090/setdayoff", {
                     method: "POST",
                     headers: {"Content-Type": "application/json",}, 
-                    body: JSON.stringify({ day: day, month: month, year: year, cpf: this.cpf}),
+                    body: JSON.stringify({ day: day, month: month, year: year, cpf: this.cpf }),
                 })
                 .then(response => {
                     if(response.status === 400) {
@@ -140,6 +144,53 @@
                     }
                 });
             },
+
+            async getAlllUsersDayOff() {  
+                await fetch("http://localhost:8090/getalldayoff", {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json",},
+                    body: JSON.stringify({ cpf: this.cpf }),
+                })
+                .then(response => response.json())
+                .then(json => this.checkWorkersDayOff(json))
+                .catch(error => this.getUserError(error))    
+            },
+
+            checkWorkersDayOff(json) {
+                 json.forEach(
+                     element => {
+                        const separated = element.day_off_date.match(/[^-T]+/g); //TODO: remove all after T
+                        const date = {year: separated[0] , month: separated[1], day: separated[2]};
+                        this.techsDayOff.push({ name: element.name, date: date });
+
+                        if(this.coworkersName.filter(value => value?.name === element.name).length === 0) {
+                            this.coworkersName.push({name: element.name});
+                        }              
+                     }
+                 );
+            },
+
+            validateDate(dayOff, date) {
+                return( Number(dayOff.day) === date.day &&
+                       Number(dayOff.month) === (date.month + 1) &&
+                       Number(dayOff.year) === date.year)
+            },
+
+            findCoworkers(day) {
+                var text = '';                
+                this.coworkersName.forEach (
+                    coworker => {      
+                        var dayOffList = this.techsDayOff.filter(element => 
+                            this.validateDate(element.date, day) === true &&
+                            element.name === coworker.name
+                        )
+
+                        if(dayOffList.length === 0) text =  text + '- ' + coworker.name + ' \n';
+                    }
+                );
+
+                return text               
+            }
         },
 
         watch: {

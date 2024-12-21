@@ -56,6 +56,12 @@ Create a button to request part from task table
 
 Same as task 11, but keeping tags.
 
+#### 14 - Add coworkers to calendar
+
+When user pass the mouse over the days numbers show list of coworkers
+
+
+
 
 # BackLog
 
