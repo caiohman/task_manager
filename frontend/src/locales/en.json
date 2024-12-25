@@ -24,7 +24,8 @@
       "updatedPart": "Updated Part",
       "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again.",
       "requestPart": "Request Part",
-      "partRequested": "Part Requested"
+      "partRequested": "Part Requested",
+      "problemHeader": "Problem"
 
     },
     "tasks": {

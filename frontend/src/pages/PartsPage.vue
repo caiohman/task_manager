@@ -31,7 +31,14 @@
                             </Select>
                         </template>
                     </Column>
-                    <Column field="atm" :header= atmHeader />
+                    <Column field="atm" :header= atmHeader >
+                        <template #body="{ data, field }">
+                            <div v-tooltip.bottom="data.atm_name">
+                                <p>{{ data[field] }}</p>
+                            </div>
+                        </template>
+                    </Column>
+                    <Column field="problem" :header= problemHeader />
                     <template #expansion="slotProps">
                         <div class="card-position">
                             <div class="timeline-position">
@@ -100,7 +107,8 @@
                 statusHeader: this.t("general.status"),
                 atmHeader: this.t("general.atm"),
                 parts: this.t("parts.parts"),
-                allDataParts: null
+                allDataParts: null,
+                problemHeader: this.t("parts.problemHeader")
             }
         },
 

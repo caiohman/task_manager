@@ -5,7 +5,7 @@
             <Button icon="pi pi-check" @click="save" style="margin: 2%;" :disabled=disableSaveButton />
         </template>
             <template #content>
-                <DataTable v-model:expandedRows="expandedRows"  
+                <DataTable v-model:expandedRows="expandedRows"   
                         :value="taskList" paginator :rows="5" dataKey="id" 
                         @rowExpand="onRowExpand" @rowCollapse="onRowCollapse">
                     <Column expander style="width: 5rem"/>  
@@ -74,7 +74,8 @@
         name: "TaskTable",
         emits: ["newTaskId"],
         props: {
-            generalStatusList : { type: Array, required: false }
+            generalStatusList : { type: Array, required: false },
+            update : { type: Boolean, required: false }
         },
 
         setup() {
@@ -133,12 +134,17 @@
             },
 
             getUserError(error) {
-                console.log(error);
+                this.toast.add({ severity: 'error', 
+                     summary: this.t("general.errorMessage"), 
+                     detail: this.t("general.serverError"), 
+                     life: 3000 });
             },
 
-            addTaskList(json) {
+            addTaskList(json, isRefresh) {
                 this.taskAllList = json;
                 var taskId = 0;
+
+                this.taskList = []; //necessay when refresh
 
                 for(let task of this.taskAllList) {
                     if( taskId === task.id) continue
@@ -241,6 +247,15 @@
                 .catch(error => this.getPartsError(error))    
             }
 
+        },
+
+        watch: {
+            update(newValue, oldValue) {
+                if(newValue == true) {
+                    this.getTasKsList();
+                    this.update = false;
+                }
+            }
         }
     }   
      

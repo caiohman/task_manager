@@ -111,7 +111,9 @@
                 </section>  
         
         </Fieldset>
-        <TaskTable class="field-relation" :general-status-list="generalStatus"  @new-task-id="(id) => newTaskId = id"/>
+        <TaskTable class="field-relation" :general-status-list="generalStatus"
+          :update="tableUpdate"  
+          @new-task-id="(id) => newTaskId = id"/>
     </div>
 </template>
 <script>
@@ -158,9 +160,11 @@
 
             const newTaskId = ref();
 
+            const tableUpdate = ref(false);
+
             return {
                 value, t, atms, selectedAtm, problems, selectedProblems, selectedTaskType, taskType, toast, newTaskId,
-                 generalStatus, selectGeneralStatus
+                 generalStatus, selectGeneralStatus, tableUpdate
             };
         },
 
@@ -242,6 +246,9 @@
                         summary: this.t("general.successMessage"), 
                         detail: this.t("tasks.taskCreated"), 
                         life: 3000 });
+                    
+                    this.tableUpdate = true;
+                    
                 })
                 .catch(error => this.getNewTaskError(error)) 
             },
@@ -255,7 +262,7 @@
                      detail: this.t("tasks.errorDetail"), 
                      life: 3000 });
                 } else {
-                    this.setNewTask()
+                    this.setNewTask();
                 }
             },
 
@@ -291,9 +298,9 @@
 .radio-buttom-align {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content:space-evenly;
     flex-wrap: wrap;
-    width: 60%;
+    width: 80%;
 }
 .field-relation {
     margin-right: 3%;

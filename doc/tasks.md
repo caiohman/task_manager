@@ -60,7 +60,14 @@ Same as task 11, but keeping tags.
 
 When user pass the mouse over the days numbers show list of coworkers
 
+#### 15 - Improvements from field experience
 
+Necessary to add atm name when list parts in order to help locate the place
+Necessary to add problem while listing parts
+Necessary to refresh list of task when add new one
+Improve initialization script 
+Fix all containers
+Start to write documentation
 
 
 # BackLog
