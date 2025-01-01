@@ -1,4 +1,4 @@
-import shlex,subprocess, sys
+import shlex,subprocess, sys, time
 
 
 # for now in order to run follow this steps:
@@ -51,6 +51,8 @@ class Launcher:
         
         self.run_command(backend_command, self.home_directory + self.backend_directory)
         self.run_command(frontend_command,  self.home_directory + self.frontend_directory)
+
+        time.sleep(10)
         self.run_command(firefox_command,  self.home_directory)
 
 

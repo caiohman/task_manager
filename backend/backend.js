@@ -363,8 +363,8 @@ app.post('/setpartsatm', async (req, res) => {
   try {
     
     const createPart = `
-      insert into parts (partnumber) values 
-      ($1); 
+      insert into parts (id, partnumber) values 
+      (( select count(id) from parts ) + 1, $1); 
     `;
 
     const bindTask = `
