@@ -246,9 +246,9 @@
                         summary: this.t("general.successMessage"), 
                         detail: this.t("tasks.taskCreated"), 
                         life: 3000 });
-                    
-                    this.tableUpdate = true;
-                    
+                })
+                .then(response => {
+                    this.tableUpdate = true;                    
                 })
                 .catch(error => this.getNewTaskError(error)) 
             },
