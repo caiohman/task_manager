@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage.vue'
 import PartsPage from './pages/PartsPage.vue'
 import TasksPage from './pages/TasksPage.vue'
 import AtmPage from './pages/AtmPage.vue'
+import CarPage from './pages/CarPage.vue'
 
 
 const routes = [
@@ -38,6 +39,12 @@ const routes = [
         path: '/atms/',
         name: 'atms',
         component: AtmPage,
+        props: true
+    },
+    {
+        path: '/car/',
+        name: 'car',
+        component: CarPage,
         props: true
     }
 ]

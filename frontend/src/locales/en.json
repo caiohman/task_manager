@@ -1,62 +1,65 @@
 {
-    "login": {
-      "register": "Register",
-      "login": "Login",
-      "username": "Username",
-      "password": "Password",
-      "wrongCredentials": "Username or Password incorrect."
-    },
-    "navbar": {
-      "country": "USA" 
-    },
-    "userFirstPage": {
-      "questionConfirm": "Are you sure you want to proceed?",
-      "confirmHeader": "Confirmation",
-      "save": "Save",
-      "cancel": "Cancel",
-      "dateExists": "Date already exists.",
-      "dateAdded": "Date Added.",
-      "userSpace": "User"
-    },
-    "parts": {
-      "parts": "Parts",
-      "codeHeader": "Code",
-      "updatedPart": "Updated Part",
-      "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again.",
-      "requestPart": "Request Part",
-      "partRequested": "Part Requested",
-      "problemHeader": "Problem"
-
-    },
-    "tasks": {
-      "tasks": "Tasks",
-      "atm": "Atm",
-      "atmName": "Name",
-      "atmNeighborhood": "Neighborhood",
-      "taskProblem": "Problem",
-      "taskProblemName": "Name",
-      "typeHeader": "Type",
-      "errorDetail": "Fill filter before submit",
-      "taskCreated": "Task Created",
-      "taskNotCreated": "Task not created. Please refresh the page and try again."
-    },
-    "general": {
-      "status": "Status",
-      "name": "Name",
-      "atm": "Atm",
-      "errorMessage": "Error Message",
-      "successMessage": "Success Message",
-      "serverError": "Server Error"
-    },
-    "atms": {
-      "atms": "Atms",
-      "selectRegion": "Region",
-      "selectModels": "Model",
-      "errorEmpty": "Please insert value",
-      "atmCreated": "Atm Created",
-      "atmExists": "Atm already exists",
-      "atmNumber": "Atm",
-      "coordinates": "Coordinates",
-      "addressName": "Adress Name"
-    }
+  "login": {
+    "register": "Register",
+    "login": "Login",
+    "username": "Username",
+    "password": "Password",
+    "wrongCredentials": "Username or Password incorrect."
+  },
+  "navbar": {
+    "country": "USA"
+  },
+  "userFirstPage": {
+    "questionConfirm": "Are you sure you want to proceed?",
+    "confirmHeader": "Confirmation",
+    "save": "Save",
+    "cancel": "Cancel",
+    "dateExists": "Date already exists.",
+    "dateAdded": "Date Added.",
+    "userSpace": "User"
+  },
+  "parts": {
+    "parts": "Parts",
+    "codeHeader": "Code",
+    "updatedPart": "Updated Part",
+    "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again.",
+    "requestPart": "Request Part",
+    "partRequested": "Part Requested",
+    "problemHeader": "Problem"
+  },
+  "tasks": {
+    "tasks": "Tasks",
+    "atm": "Atm",
+    "atmName": "Name",
+    "atmNeighborhood": "Neighborhood",
+    "taskProblem": "Problem",
+    "taskProblemName": "Name",
+    "typeHeader": "Type",
+    "errorDetail": "Fill filter before submit",
+    "taskCreated": "Task Created",
+    "taskNotCreated": "Task not created. Please refresh the page and try again."
+  },
+  "general": {
+    "status": "Status",
+    "name": "Name",
+    "atm": "Atm",
+    "errorMessage": "Error Message",
+    "successMessage": "Success Message",
+    "serverError": "Server Error"
+  },
+  "atms": {
+    "atms": "Atms",
+    "selectRegion": "Region",
+    "selectModels": "Model",
+    "errorEmpty": "Please insert value",
+    "atmCreated": "Atm Created",
+    "atmExists": "Atm already exists",
+    "atmNumber": "Atm",
+    "coordinates": "Coordinates",
+    "addressName": "Adress Name"
+  },
+  "cars": {
+    "car": "Car",
+    "licensePlate": "License Plate"
   }
+}

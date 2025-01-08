@@ -1,63 +1,65 @@
 {
-    "login": {
-      "register": "Cadastro",
-      "login": "Entrar",
-      "username": "Usuário",
-      "password": "Senha",
-      "wrongCredentials": "Usuário e/ou senha incorreto(s)."
-     },
-    "navbar": {
-      "country": "Brasil"
-    },
-    "userFirstPage": {
-      "questionConfirm": "Tem certeza que deseja prosseguir?",
-      "confirmHeader": "Confirmação",
-      "save": "Salvar",
-      "cancel": "Cancelar",
-      "dateExists": "Data já existe.",
-      "dateAdded": "Data adicionada.",
-      "userSpace": "Usuário"
-    },
-    "parts": {
-      "parts": "Peças",
-      "codeHeader": "Código",
-      "updatedPart": "Status da peça atualizado com sucesso",
-      "partNotUpdated": "Peça não pôde ser atualizada. Por favor atualize a página e tente novamente.",
-      "requestPart": "Solicite peça",
-      "partRequested": "Peça Solicitada",
-      "problemHeader": "Problema"
-
-
-    },
-    "tasks": {
-      "tasks": "Chamados",
-      "atm": "Pc",
-      "atmName": "Nome",
-      "atmNeighborhood": "Bairro",
-      "taskProblem": "Problema",
-      "taskProblemName": "Nome",
-      "typeHeader": "Tipo",
-      "errorDetail": "Preencher os filtros antes de submeter",
-      "taskCreated": "Tarefa Criada com Sucesso",
-      "taskNotCreated": "Tarefa não criada. Por favor atualize a página e tente novamente."
-    },
-    "general": {
-      "status": "Status",
-      "name": "Nome",
-      "atm": "Pc",
-      "errorMessage": "Mensagem de Erro",
-      "successMessage": "Mensagem de Sucesso",
-      "serverError": "Erro no servidor."
-    },
-    "atms": {
-      "atms": "Atms",
-      "selectRegion": "Bairro",
-      "selectModels": "Modelo",
-      "errorEmpty": "Por favor insira valores nos campos",
-      "atmCreated": "Atm Criada",
-      "atmExists": "Atm com esse número já existe",
-      "atmNumber": "Atm",
-      "coordinates": "Coordenadas",
-      "addressName": "Nome"
-    }  
+  "login": {
+    "register": "Cadastro",
+    "login": "Entrar",
+    "username": "Usuário",
+    "password": "Senha",
+    "wrongCredentials": "Usuário e/ou senha incorreto(s)."
+  },
+  "navbar": {
+    "country": "Brasil"
+  },
+  "userFirstPage": {
+    "questionConfirm": "Tem certeza que deseja prosseguir?",
+    "confirmHeader": "Confirmação",
+    "save": "Salvar",
+    "cancel": "Cancelar",
+    "dateExists": "Data já existe.",
+    "dateAdded": "Data adicionada.",
+    "userSpace": "Usuário"
+  },
+  "parts": {
+    "parts": "Peças",
+    "codeHeader": "Código",
+    "updatedPart": "Status da peça atualizado com sucesso",
+    "partNotUpdated": "Peça não pôde ser atualizada. Por favor atualize a página e tente novamente.",
+    "requestPart": "Solicite peça",
+    "partRequested": "Peça Solicitada",
+    "problemHeader": "Problema"
+  },
+  "tasks": {
+    "tasks": "Chamados",
+    "atm": "Pc",
+    "atmName": "Nome",
+    "atmNeighborhood": "Bairro",
+    "taskProblem": "Problema",
+    "taskProblemName": "Nome",
+    "typeHeader": "Tipo",
+    "errorDetail": "Preencher os filtros antes de submeter",
+    "taskCreated": "Tarefa Criada com Sucesso",
+    "taskNotCreated": "Tarefa não criada. Por favor atualize a página e tente novamente."
+  },
+  "general": {
+    "status": "Status",
+    "name": "Nome",
+    "atm": "Pc",
+    "errorMessage": "Mensagem de Erro",
+    "successMessage": "Mensagem de Sucesso",
+    "serverError": "Erro no servidor."
+  },
+  "atms": {
+    "atms": "Atms",
+    "selectRegion": "Bairro",
+    "selectModels": "Modelo",
+    "errorEmpty": "Por favor insira valores nos campos",
+    "atmCreated": "Atm Criada",
+    "atmExists": "Atm com esse número já existe",
+    "atmNumber": "Atm",
+    "coordinates": "Coordenadas",
+    "addressName": "Nome"
+  },
+  "cars": {
+    "car": "Carro",
+    "licensePlate": "Placa do Veículo"
   }
+}

@@ -11,7 +11,8 @@
     flex-wrap: wrap;
 }
 
-.flex-row, .options-line {
+.flex-row,
+.options-line {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -33,4 +34,8 @@
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+}
+
+.flex-evenly {
+    justify-content: space-evenly;
 }
