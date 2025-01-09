@@ -26,11 +26,28 @@
                     <div v-show="isCarMatched === true">
                         <p>
                             {{
+                                "" + t("cars.model") + " : " + carMatched.model
+                            }}
+                        </p>
+                        <p>
+                            {{
                                 "" +
                                 t("cars.licensePlate") +
                                 " : " +
                                 carMatched.license_plate
                             }}
+                        </p>
+                        <p>
+                            {{
+                                "" +
+                                t("cars.receivedDate") +
+                                " : " +
+                                carMatched.user_date?.substring(0, 10)
+                            }}
+                        </p>
+
+                        <p>
+                            {{ "" + t("cars.km") + " : " + carMatched.car_km }}
                         </p>
                     </div>
                 </Fieldset>
@@ -70,7 +87,7 @@ export default {
         return {
             carPhotos: [
                 { name: "Gol", image: "/src/assets/cars/gol.jpg" },
-                { name: "HB20", image: "/src/assets/cars/hb20.png" },
+                { name: "HB20", image: "/src/assets/cars/hb20.jpg" },
                 { name: "Argo", image: "/src/assets/cars/argo.jpg" },
             ],
             carLegend: this.t("cars.car"),

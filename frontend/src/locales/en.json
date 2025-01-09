@@ -60,6 +60,9 @@
   },
   "cars": {
     "car": "Car",
-    "licensePlate": "License Plate"
+    "licensePlate": "License Plate",
+    "model": "Model",
+    "receivedDate": "Received date",
+    "km": "Received km"
   }
 }

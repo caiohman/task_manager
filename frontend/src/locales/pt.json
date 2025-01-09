@@ -60,6 +60,9 @@
   },
   "cars": {
     "car": "Carro",
-    "licensePlate": "Placa do Veículo"
+    "licensePlate": "Placa do Veículo",
+    "model": "Modelo",
+    "receivedDate": "Data recebido",
+    "km": "Km recebido"
   }
 }
