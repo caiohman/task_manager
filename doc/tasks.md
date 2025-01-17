@@ -65,7 +65,7 @@ Feedback: Same as task 01.
 - Necessary to add atm name when list parts in order to help locate the place
 - Necessary to add problem while listing parts
 - Necessary to refresh list of task when add new one
-- Improve initialization script 
+- Improve initialization script
 - Fix all containers
 - Start to write documentation
 
@@ -73,6 +73,9 @@ Feedback: Same as task 01.
 
 - Set id to parts table to avoid id problem.
 
+#### 17 - Add cars page  (feature)
+
+- Add a car selector and provide basic information on car use
 
 # BackLog
 
@@ -84,5 +87,3 @@ Feedback: Same as task 01.
 #### ?? - Add home informations (feature)
 
 - It has to be simple like an overview of the website
-
-
