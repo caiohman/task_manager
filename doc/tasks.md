@@ -77,12 +77,12 @@ Feedback: Same as task 01.
 
 - Add a car selector and provide basic information on car use
 
+#### 18 - Add filters to parts table and task page (feature)
+
+- Add status filter to improve part search and complete filter to task page
+
+
 # BackLog
-
-#### ?? - Add filters to parts table (feature)
-
-- Add filters like status, atm to improve part search
-
 
 #### ?? - Add home informations (feature)
 

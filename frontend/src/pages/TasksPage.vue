@@ -177,7 +177,11 @@
                     class="field-relation"
                     @click="saveNewTaskValidation"
                 />
-                <Button icon="pi pi-search" class="field-relation" />
+                <Button
+                    icon="pi pi-search"
+                    class="field-relation"
+                    @click="searchTable"
+                />
             </section>
         </Fieldset>
         <TaskTable
@@ -185,6 +189,7 @@
             :general-status-list="generalStatus"
             :update="tableUpdate"
             @new-task-id="(id) => (newTaskId = id)"
+            :filter="search"
         />
     </div>
 </template>
@@ -203,9 +208,7 @@ export default {
     name: "TaskPage",
     components: {
         InputNumber,
-        Select,
         FloatLabel,
-        Button,
         RadioButton,
         TaskTable,
     },
@@ -232,6 +235,13 @@ export default {
 
         const tableUpdate = ref(false);
 
+        const search = ref({
+            atm: undefined,
+            problem: undefined,
+            type: undefined,
+            status: undefined,
+        });
+
         return {
             value,
             t,
@@ -246,6 +256,7 @@ export default {
             generalStatus,
             selectGeneralStatus,
             tableUpdate,
+            search,
         };
     },
 
@@ -354,6 +365,7 @@ export default {
                     life: 3000,
                 });
             } else {
+                if (this.tableUpdate === true) this.tableUpdate = false;
                 this.setNewTask();
             }
         },
@@ -379,6 +391,37 @@ export default {
 
         addGeneralStatusList(json) {
             this.generalStatus = json;
+        },
+
+        fillSearch() {
+            this.selectedAtm !== undefined
+                ? (this.search["atm"] = this.selectedAtm.atm)
+                : console.log("no atm selected");
+            this.selectedProblems !== undefined
+                ? (this.search["problem"] = this.selectedProblems.problem)
+                : console.log("no problem selected");
+            this.selectedTaskType !== undefined
+                ? (this.search["type"] = this.selectedTaskType)
+                : console.log("no task type selected");
+            this.selectGeneralStatus !== undefined
+                ? (this.search["status"] = this.selectGeneralStatus)
+                : console.log("no general status selected");
+            this.tableUpdate = true;
+        },
+
+        searchTable() {
+            if (this.tableUpdate === true) this.tableUpdate = false;
+            this.selectedAtm === undefined &&
+            this.selectedProblems === undefined &&
+            this.selectedTaskType === undefined &&
+            this.selectGeneralStatus === undefined
+                ? this.toast.add({
+                      severity: "error",
+                      summary: this.t("general.errorMessage"),
+                      detail: this.t("tasks.errorDetail"),
+                      life: 3000,
+                  })
+                : this.fillSearch();
         },
     },
 };
