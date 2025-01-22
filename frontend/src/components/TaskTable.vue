@@ -111,6 +111,7 @@
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { useToast } from "primevue/usetoast";
+import loggedStore from "../stores/LoggedStore";
 
 export default {
     name: "TaskTable",
@@ -143,6 +144,8 @@ export default {
         const parts = ref([]);
         const selectedPart = ref();
 
+        const userLogged = loggedStore();
+
         return {
             taskList,
             taskAllList,
@@ -156,6 +159,7 @@ export default {
             dialogVisible,
             parts,
             selectedPart,
+            userLogged,
         };
     },
 
@@ -249,7 +253,11 @@ export default {
             await fetch("http://localhost:8090/settasknewstatus", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ id: taskId, status: status }),
+                body: JSON.stringify({
+                    id: taskId,
+                    status: status,
+                    user: this.userLogged.cpf,
+                }),
             })
                 .then((response) => {
                     this.toast.add({

@@ -203,6 +203,7 @@ import Button from "primevue/button";
 import RadioButton from "primevue/radiobutton";
 import TaskTable from "../components/TaskTable.vue";
 import { useToast } from "primevue/usetoast";
+import loggedStore from "../stores/LoggedStore";
 
 export default {
     name: "TaskPage",
@@ -235,6 +236,8 @@ export default {
 
         const tableUpdate = ref(false);
 
+        const userLogged = loggedStore();
+
         const search = ref({
             atm: undefined,
             problem: undefined,
@@ -257,6 +260,7 @@ export default {
             selectGeneralStatus,
             tableUpdate,
             search,
+            userLogged,
         };
     },
 
@@ -336,6 +340,7 @@ export default {
                     atm: this.selectedAtm.atm,
                     problem: this.selectedProblems.problem,
                     type: this.selectedTaskType,
+                    user: this.userLogged.cpf,
                 }),
             })
                 .then((response) => {
@@ -438,11 +443,7 @@ export default {
     flex-wrap: wrap;
     width: 80%;
 }
-.field-relation {
-    margin-right: 3%;
-}
 .last-field-relation,
-.field-relation,
 .new-task {
     margin-bottom: 3%;
 }

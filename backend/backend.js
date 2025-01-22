@@ -180,7 +180,7 @@ app.post("/listtasks", async (req, res) => {
 });
 
 app.post("/setnewtask", async (req, res) => {
-  const { id, atm, problem, type } = req.body;
+  const { id, atm, problem, type, cpf } = req.body;
 
   try {
     const insertTask = `
@@ -190,11 +190,11 @@ app.post("/setnewtask", async (req, res) => {
 
     const insertTechServiceStatus = `
       insert into tech_service_status (service_date, service_time, task, task_status, tech) values (
-      CURRENT_DATE, CURRENT_TIME, $1 , 1, '000.000.000-00');
+      CURRENT_DATE, CURRENT_TIME, $1 , 1, $2);
     `;
 
     const valuesTask = [id, atm, problem, type];
-    const valuesTechServiceStatus = [id];
+    const valuesTechServiceStatus = [id, cpf];
 
     await pool.query(insertTask, valuesTask);
     await pool.query(insertTechServiceStatus, valuesTechServiceStatus);
@@ -222,15 +222,15 @@ app.get("/listgeneralstatus", async (req, res) => {
 });
 
 app.post("/settasknewstatus", async (req, res) => {
-  const { id, status } = req.body;
+  const { id, status, cpf } = req.body;
 
   try {
     const insertTechServiceStatus = `
       insert into tech_service_status (service_date, service_time, task, task_status, tech) values (
-      CURRENT_DATE, CURRENT_TIME, $1 , (select id from general_status where status_name = $2), '000.000.000-00');
+      CURRENT_DATE, CURRENT_TIME, $1 , (select id from general_status where status_name = $2), $3);
     `;
 
-    const valuesTechServiceStatus = [id, status];
+    const valuesTechServiceStatus = [id, status, cpf];
 
     await pool.query(insertTechServiceStatus, valuesTechServiceStatus);
 
@@ -425,6 +425,21 @@ app.post("/listcar", async (req, res) => {
     const values = [cpf];
 
     const { rows } = await pool.query(query, values);
+    console.log(rows);
+    res.status(201).json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.post("/getatmlist", async (req, res) => {
+  try {
+    const query = `
+      select id, position, region, model, atm_name from atm;
+    `;
+
+    const { rows } = await pool.query(query);
     console.log(rows);
     res.status(201).json(rows);
   } catch (error) {

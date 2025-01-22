@@ -22,8 +22,8 @@
         </section>
         <section style="width: 45%">
             <div>
-                <Fieldset :legend="carLegend">
-                    <div v-show="isCarMatched === true">
+                <Fieldset v-show="isCarMatched === true" :legend="carLegend">
+                    <div>
                         <p>
                             {{
                                 "" + t("cars.model") + " : " + carMatched.model
