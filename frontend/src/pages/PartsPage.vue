@@ -308,8 +308,13 @@ export default {
     watch: {
         filter(newValue, oldValue) {
             if (newValue !== "") {
-                this.products = this.products.filter((element) =>
-                    element.status.includes(newValue),
+                this.products = this.products.filter(
+                    (element) =>
+                        element.status.includes(newValue) ||
+                        String(element.atm).includes(newValue) ||
+                        String(element.code).includes(newValue) ||
+                        element.name.includes(newValue) ||
+                        String(element.problem).includes(newValue),
                 );
             } else {
                 this.products = this.productsCopy;

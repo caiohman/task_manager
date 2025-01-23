@@ -130,7 +130,7 @@ export default {
 
     data() {
         return {
-            image: "/src/assets/profiles/atm.jpg",
+            image: "./src/assets/profiles/atm.jpg",
             atms: this.t("atms.atms"),
             selectRegion: this.t("atms.selectRegion"),
             selectModel: this.t("atms.selectModels"),

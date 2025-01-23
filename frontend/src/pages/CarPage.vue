@@ -6,7 +6,7 @@
                 :numVisible="1"
                 :numScroll="1"
                 circular
-                :autoplayInterval="30000"
+                :autoplayInterval="5000"
             >
                 <template #item="slotProps">
                     <div class="card-position">
@@ -86,9 +86,9 @@ export default {
     data() {
         return {
             carPhotos: [
-                { name: "Gol", image: "/src/assets/cars/gol.jpg" },
-                { name: "HB20", image: "/src/assets/cars/hb20.jpg" },
-                { name: "Argo", image: "/src/assets/cars/argo.jpg" },
+                { name: "Gol", image: "./src/assets/cars/gol.jpg" },
+                { name: "HB20", image: "./src/assets/cars/hb20.jpg" },
+                { name: "Argo", image: "./src/assets/cars/argo.jpg" },
             ],
             carLegend: this.t("cars.car"),
         };

@@ -20,7 +20,17 @@
                 @rowCollapse="onRowCollapse"
             >
                 <Column expander style="width: 5rem" />
-                <Column field="atm" :header="atm" />
+                <Column field="atm" :header="atm">
+                    <template #body="{ data, field }">
+                        <div
+                            v-tooltip.bottom="
+                                data.atm_name + '\n' + data.model_name
+                            "
+                        >
+                            <p>{{ data[field] }}</p>
+                        </div>
+                    </template>
+                </Column>
                 <Column field="problem" :header="problem" />
                 <Column field="type" :header="type" />
                 <Column field="status" :header="status">
@@ -256,7 +266,7 @@ export default {
                 body: JSON.stringify({
                     id: taskId,
                     status: status,
-                    user: this.userLogged.cpf,
+                    cpf: this.userLogged.cpf,
                 }),
             })
                 .then((response) => {

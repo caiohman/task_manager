@@ -340,7 +340,7 @@ export default {
                     atm: this.selectedAtm.atm,
                     problem: this.selectedProblems.problem,
                     type: this.selectedTaskType,
-                    user: this.userLogged.cpf,
+                    cpf: this.userLogged.cpf,
                 }),
             })
                 .then((response) => {

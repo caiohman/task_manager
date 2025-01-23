@@ -162,12 +162,15 @@ app.post("/listtasks", async (req, res) => {
   try {
     const query = `
       select t.id, t.problem, t.atm, tt.task_type as type,
-      tss.service_date as date, tss.service_time as time,
-      gs.status_name as status
-      from task t
-      join task_type tt on tt.id = t.task_type
-      join tech_service_status tss on tss.task = t.id
-      join general_status gs on gs.id = tss.task_status order by t.id, tss.task_status desc;
+        tss.service_date as date, tss.service_time as time,
+        gs.status_name as status, a.atm_name, am.model_name
+        from task t
+        join task_type tt on tt.id = t.task_type
+        join tech_service_status tss on tss.task = t.id
+        join general_status gs on gs.id = tss.task_status
+        join atm a on a.id = t.atm
+        join atm_models am on am.id = a.model
+        order by t.id, tss.task_status desc;
     `;
 
     const { rows } = await pool.query(query);
