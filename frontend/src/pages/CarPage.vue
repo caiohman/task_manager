@@ -86,9 +86,21 @@ export default {
     data() {
         return {
             carPhotos: [
-                { name: "Gol", image: "./src/assets/cars/gol.jpg" },
-                { name: "HB20", image: "./src/assets/cars/hb20.jpg" },
-                { name: "Argo", image: "./src/assets/cars/argo.jpg" },
+                {
+                    name: "Gol",
+                    image: new URL("./../assets/cars/gol.jpg", import.meta.url)
+                        .href,
+                },
+                {
+                    name: "HB20",
+                    image: new URL("./../assets/cars/hb20.jpg", import.meta.url)
+                        .href,
+                },
+                {
+                    name: "Argo",
+                    image: new URL("./../assets/cars/argo.jpg", import.meta.url)
+                        .href,
+                },
             ],
             carLegend: this.t("cars.car"),
         };

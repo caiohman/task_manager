@@ -1,5 +1,5 @@
 # Use the official Node.js image as the base image
-FROM node:22-alpine 
+FROM node:23-alpine
 
 # Set the working directory
 WORKDIR /usr/src/app
@@ -8,7 +8,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
+RUN yarn install
 
 # Copy the application files
 COPY backend.js .

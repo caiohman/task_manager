@@ -69,8 +69,9 @@ export default {
             dayOff: [],
             date: null,
             image: this.name.includes("Caio")
-                ? "./src/assets/profiles/caio.jpg"
-                : "./src/assets/profiles/tecban.png",
+                ? new URL("./../assets/profiles/caio.jpg", import.meta.url).href
+                : new URL("./../assets/profiles/tecban.png", import.meta.url)
+                      .href,
         };
     },
 

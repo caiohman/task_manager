@@ -130,7 +130,8 @@ export default {
 
     data() {
         return {
-            image: "./src/assets/profiles/atm.jpg",
+            image: new URL("./../assets/profiles/atm.jpg", import.meta.url)
+                .href,
             atms: this.t("atms.atms"),
             selectRegion: this.t("atms.selectRegion"),
             selectModel: this.t("atms.selectModels"),
