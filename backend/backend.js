@@ -451,6 +451,43 @@ app.post("/getatmlist", async (req, res) => {
   }
 });
 
+app.post("/getlooselist", async (req, res) => {
+  const { cpf } = req.body;
+
+  try {
+    const query = `
+      select loose_name as name, quantity, minimum from loose where cpf = $1;
+    `;
+
+    const values = [cpf];
+
+    const { rows } = await pool.query(query, values);
+    console.log(rows);
+    res.status(201).json(rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
+app.post("/updatelooselist", async (req, res) => {
+  const { cpf, name, quantity } = req.body;
+
+  try {
+    const query = `
+      update loose set quantity = $1 where cpf = $2 and loose.loose_name = $3;
+    `;
+
+    const values = [quantity, cpf, name];
+
+    await pool.query(query, values);
+    res.status(201).json({ message: "Added" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error response" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

@@ -7,7 +7,7 @@ primary key(id)
 create table if not exists atm_models (
 id serial,
 model_name varchar(255) not null,
-primary key(id)  
+primary key(id)
 );
 
 create table if not exists problems (
@@ -25,23 +25,23 @@ primary key(id)
 create table if not exists part_status (
 id integer,
 status_name varchar(50) not null,
-primary key(id) 
+primary key(id)
 );
 
 create table if not exists parts_catalog (
 partnumber integer,
 part_name varchar(255) not null,
 part_image bytea,
-primary key(partnumber) 
+primary key(partnumber)
 );
 
-create table if not exists car (   
+create table if not exists car (
 id serial,
 model varchar(255) not null,
 car_year varchar(10) not null,
 license_plate varchar(15) not null,
 car_image bytea,
-primary key(id)  
+primary key(id)
 );
 
 create table if not exists task_type (
@@ -49,7 +49,7 @@ id integer,
 task_type varchar(20) not null,
 task_score integer,
 primary key(id)
-); 
+);
 
 create table if not exists tech (
 cpf varchar(20) not null,
@@ -90,7 +90,7 @@ create table if not exists day_off (
 cpf varchar(20) not null,
 day_off_date date,
 unique(cpf, day_off_date),
-constraint fk_day_off_cpf foreign key(cpf) references tech(cpf) 
+constraint fk_day_off_cpf foreign key(cpf) references tech(cpf)
 );
 
 create table if not exists task (
@@ -111,12 +111,12 @@ constraint fk_charge_tech foreign key(tech) references tech(cpf),
 constraint fk_charge_region foreign key(region) references region(id)
 );
 
-create table if not exists part_model (       
+create table if not exists part_model (
 part integer,
 model integer,
 unique(part, model),
 constraint fk_part_model_part foreign key(part) references parts_catalog(partnumber),
-constraint fk_part_model_model foreign key(model) references atm_models(id)   
+constraint fk_part_model_model foreign key(model) references atm_models(id)
 );
 
 create table if not exists tech_service_status (
@@ -132,17 +132,17 @@ constraint fk_service_task_status foreign key(task_status) references general_st
 constraint fk_service_tech foreign key(tech) references tech(cpf)
 );
 
-create table if not exists car_user (   
+create table if not exists car_user (
 id serial,
 car integer,
-tech varchar(20), 
+tech varchar(20),
 user_date date,
 car_km integer,
 constraint fk_car_user_car foreign key(car) references car(id),
-constraint fk_car_user_tech foreign key(tech) references tech(cpf)  
+constraint fk_car_user_tech foreign key(tech) references tech(cpf)
 );
 
-create table if not exists car_service (   
+create table if not exists car_service (
 id serial,
 car integer,
 car_service_date date,
@@ -153,8 +153,8 @@ constraint fk_car_service_car foreign key(car) references car(id)
 );
 
 create table if not exists part_task (
-id serial,       
-part integer, 
+id serial,
+part integer,
 task integer,
 primary key(id),
 constraint fk_part_task_part foreign key(part) references parts(id),
@@ -172,7 +172,7 @@ constraint fk_spending_car_service foreign key(car_service) references car_servi
 create table if not exists tech_procedure (
 id serial,
 tech_procedure varchar(255) not null,
-primary key(id)    
+primary key(id)
 );
 
 create table tech_login (
@@ -180,6 +180,14 @@ cpf varchar(20),
 username varchar(50) not null unique,
 userpassword varchar(255) not null unique,
 constraint fk_login_id foreign key(cpf) references tech(cpf)
+);
+
+create table loose (
+loose_name varchar(255) not null unique,
+quantity integer,
+minimum integer,
+cpf varchar(20),
+constraint fk_loose_cpf foreign key(cpf) references tech(cpf) on delete cascade
 );
 
 -- TODO

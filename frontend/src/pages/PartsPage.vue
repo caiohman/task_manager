@@ -108,20 +108,41 @@
             </template>
         </Card>
     </div>
+    <Fieldset :legend="loose">
+        <div class="flex-row flex-evenly">
+            <div v-for="loose in looseList">
+                <div class="flex-column flex-center">
+                    <Tag severity="secondary" :value="loose.name"></Tag>
+                    <div class="flex-row">
+                        <Button
+                            icon="pi pi-plus"
+                            @click="addLooseQuantity(loose)"
+                        />
+                        <InputText
+                            v-model="loose.quantity"
+                            disabled
+                            style="text-align: center"
+                        />
+                        <Button
+                            icon="pi pi-minus"
+                            @click="subtractLooseQuantity(loose)"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Fieldset>
 </template>
 
 <script>
 import { ref } from "vue";
-import DataTable from "primevue/datatable";
-import Column from "primevue/column";
 import Tag from "primevue/tag";
 import { useI18n } from "vue-i18n";
-import Card from "primevue/card";
-import Timeline from "primevue/timeline";
 import { useToast } from "primevue/usetoast";
 import IconField from "primevue/iconfield";
 import InputIcon from "primevue/inputicon";
 import InputText from "primevue/inputtext";
+import loggedStore from "../stores/LoggedStore";
 
 export default {
     name: "PartsPage",
@@ -148,6 +169,10 @@ export default {
         const filter = ref();
         const productsCopy = ref([]);
 
+        const looseList = ref([]);
+
+        const userLogged = loggedStore();
+
         return {
             products,
             t,
@@ -159,6 +184,8 @@ export default {
             disableSaveButton,
             filter,
             productsCopy,
+            looseList,
+            userLogged,
         };
     },
 
@@ -171,12 +198,14 @@ export default {
             parts: this.t("parts.parts"),
             allDataParts: null,
             problemHeader: this.t("parts.problemHeader"),
+            loose: this.t("parts.loose"),
         };
     },
 
     beforeMount() {
         this.getPartsList();
         this.getPartStatusOptions();
+        this.getLooseList();
     },
 
     methods: {
@@ -302,6 +331,50 @@ export default {
 
         getPartStatusError(error) {
             console.log(error);
+        },
+
+        async getLooseList() {
+            await fetch("http://localhost:8090/getlooselist", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ cpf: this.userLogged.cpf }),
+            })
+                .then((response) => response.json())
+                .then((json) =>
+                    json.forEach((loose) => this.looseList.push(loose)),
+                )
+                .catch((error) => getlooseListError(error));
+        },
+
+        getlooseListError(error) {
+            this.toast.add({
+                severity: "error",
+                summary: this.t("general.errorMessage"),
+                detail: this.t("parts.getLooseError"),
+                life: 3000,
+            });
+        },
+
+        async updateLooseList(name, sum) {
+            await fetch("http://localhost:8090/updatelooselist", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    cpf: this.userLogged.cpf,
+                    name: name,
+                    quantity: sum,
+                }),
+            }).catch((error) => console.log(error));
+        },
+
+        addLooseQuantity(loose) {
+            loose.quantity += 1;
+            this.updateLooseList(loose.name, loose.quantity);
+        },
+
+        subtractLooseQuantity(loose) {
+            loose.quantity -= 1;
+            this.updateLooseList(loose.name, loose.quantity);
         },
     },
 

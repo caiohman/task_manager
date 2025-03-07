@@ -81,6 +81,15 @@ Feedback: Same as task 01.
 
 - Add status filter to improve part search and complete filter to task page
 
+#### 19 - Add search to atm (feature)
+
+- FeedBack: Work in progress
+
+#### 20 - Add loose parts to keep counting track (feature)
+
+- There are some loose parts that are not necessary to add to task, but it is necessary to know the quantity available.
+
+
 
 # BackLog
 

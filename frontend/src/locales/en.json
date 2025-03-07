@@ -25,7 +25,9 @@
     "partNotUpdated": "Part couldn't be updated. Please refresh the page and try again.",
     "requestPart": "Request Part",
     "partRequested": "Part Requested",
-    "problemHeader": "Problem"
+    "problemHeader": "Problem",
+    "loose": "Loose",
+    "getLooseError": "Loose list coudn't be loaded"
   },
   "tasks": {
     "tasks": "Tasks",

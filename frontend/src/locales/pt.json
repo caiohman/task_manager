@@ -25,7 +25,9 @@
     "partNotUpdated": "Peça não pôde ser atualizada. Por favor atualize a página e tente novamente.",
     "requestPart": "Solicite peça",
     "partRequested": "Peça Solicitada",
-    "problemHeader": "Problema"
+    "problemHeader": "Problema",
+    "loose": "Avulso",
+    "getLooseError": "A lista de items avulsos não pôde ser carregada"
   },
   "tasks": {
     "tasks": "Chamados",
