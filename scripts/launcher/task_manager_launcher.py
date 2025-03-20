@@ -16,6 +16,7 @@ import shlex,subprocess, sys, time
 # source repo/task_manager/scripts/launcher/venv/bin/activate
 # python repo/task_manager/scripts/launcher/task_manager_launcher.py --container
 # exit
+# source repo/task_manager/scripts/launcher/venv/bin/activate
 # python repo/task_manager/scripts/launcher/task_manager_launcher.py --browser
 
 class Launcher:
@@ -24,19 +25,19 @@ class Launcher:
     frontend_directory = "frontend/"
 
     def __init__(self, params):
-        
+
         if len(params) > 1 and params[1] == '--base':
             self.db_up()
             return
-        
+
         if len(params) > 1 and params[1] == '--debug':
             self.debug()
             return
-        
+
         if len(params) > 1 and params[1] == '--container':
             self.containers_up()
             return
-        
+
         if len(params) > 1 and params[1] == '--browser':
             self.open_browser_container()
             return
@@ -47,8 +48,8 @@ class Launcher:
 
         backend_command = "node backend.js"
         frontend_command = "npm run dev"
-        firefox_command = "firefox http://localhost:5173/" 
-        
+        firefox_command = "firefox http://localhost:5173/"
+
         self.run_command(backend_command, self.home_directory + self.backend_directory)
         self.run_command(frontend_command,  self.home_directory + self.frontend_directory)
 
@@ -71,7 +72,7 @@ class Launcher:
         self.run_command(db_container, self.home_directory)
         self.run_command(backend_container, self.home_directory)
         self.run_command(frontend_container,  self.home_directory)
- 
+
     def db_up(self): #run as sudo
         db_container = "sudo docker compose up db -d"
         self.run_command(db_container, self.home_directory)
@@ -82,4 +83,4 @@ class Launcher:
 
 
 if __name__== '__main__':
-    Launcher(sys.argv)           
+    Launcher(sys.argv)

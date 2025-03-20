@@ -64,9 +64,11 @@ region  integer,
 position point,
 model integer,
 atm_name varchar(255) not null,
+motherboard integer,
 primary key(id),
 constraint fk_atm_region foreign key(region) references region(id),
-constraint fk_atm_model foreign key(model) references atm_models(id)
+constraint fk_atm_model foreign key(model) references atm_models(id),
+constraint fk_atm_motherboard foreign key(motherboard) references motherboard(id) on delete cascade
 );
 
 create table if not exists parts (
@@ -188,6 +190,12 @@ quantity integer,
 minimum integer,
 cpf varchar(20),
 constraint fk_loose_cpf foreign key(cpf) references tech(cpf) on delete cascade
+);
+
+create table if not exists motherboard (
+id serial,
+motherboard_name varchar(100),
+primary key(id)
 );
 
 -- TODO
